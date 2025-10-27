@@ -1,0 +1,23 @@
+output_dir: "../_site/posts"
+navbar:
+  title: "Mente y Métrica"
+  left:
+    - text: "Inicio"
+      href: ../index.html
+    - text: "Sobre mí"
+      href: ../about.html
+    - text: "Publicaciones"
+      href: ../posts.html
+  right:
+    - icon: fa-linkedin
+      href: "https://www.linkedin.com/in/german-torres-varas"
+    - icon: fa-envelope
+      href: "mailto:torresgvaras@gmail.com"
+
+output:
+  html_document:
+    theme: flatly
+    highlight: tango
+    css: ../styles.css
+    includes:
+      after_body: ../footer.html

@@ -1,0 +1,28 @@
+name: "Mente y Método"
+output_dir: "_site"
+navbar:
+  title: "Mente y Métrica"
+  left:
+    - text: "Inicio"
+      href: index.html
+    - text: "Sobre mí"
+      href: about.html
+    - text: "Publicaciones"
+      href: posts.html
+  right:
+    - icon: fa-linkedin
+      href: "https://www.linkedin.com/in/german-torres-varas"
+    - icon: fa-envelope
+      href: "mailto:torresgvaras@gmail.com"
+    - icon: fab fa-researchgate
+      href: "https://www.researchgate.net/profile/German-Torres-Varas?ev=hdr_xprf"
+    - icon: fa-twitter
+      href: "https://x.com/GermanTorVar"
+
+output:
+  html_document:
+    theme: flatly
+    highlight: tango
+    css: styles.css
+    includes:
+      after_body: footer.html

@@ -1,0 +1,119 @@
+/* ========================
+   ESTILO GLOBAL - MENTE Y MÉTODO
+   ======================== */
+
+/* Fuente y colores base */
+body {
+  background: #c1c1c1; /* gris claro con tono frío */
+  color: #222;
+  font-family: 'Inter', 'Lato', 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.7;
+  margin: 0;
+  text-align: justify;
+}
+
+/* Contenedor principal */
+.main-container {
+  max-width: 950px;
+  background: #ffffff;
+  margin: 40px auto;
+  padding: 40px 50px;
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.05);
+}
+
+/* Cabecera / Navbar */
+.navbar-default {
+  background-color: #0a2540; /* azul grisáceo elegante */
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav > li > a {
+  color: #f4f6f8 !important;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+.navbar-default .navbar-nav > li > a:hover {
+  color: #00bfa6 !important;
+}
+
+/* Enlaces */
+a {
+  color: #007b8a;
+  text-decoration: none;
+}
+a:hover {
+  color: #00bfa6;
+  text-decoration: underline;
+}
+
+/* Titulares */
+/* Título del post */
+h1.title {
+  text-align: center;
+  font-size: 2.5em;
+  color: #0a2540;
+  padding-bottom: 5px;
+  margin-bottom: 1em;
+  border-bottom: 2px solid #00bfa6;
+}
+
+h3.subtitle {
+  text-align: center;
+  font-size: 1.5em;
+  color: #007b8a;       /* o el tono complementario a tu h1.title */
+  margin-top: -1em;
+  margin-bottom: 1em;
+  font-style: italic;   /* opcional, da elegancia */
+}
+
+h1, h2, h3, h4 {
+  font-weight: 1.3em;
+  color: #0a2540;
+  margin-top: 1.4em;
+  margin-bottom: 0.6em;
+}
+
+/* Bloques de código */
+pre, code {
+  background: #eaf6f8;
+  border-radius: 8px;
+  padding: 0.4em 0.6em;
+  font-size: 0.9em;
+}
+
+/* Tablas */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+th {
+  background-color: #f1f5f8;
+  color: #0a2540;
+}
+
+/* Botones */
+.btn {
+  background: #007b8a;
+  color: white;
+  border-radius: 8px;
+  padding: 8px 16px;
+}
+.btn:hover {
+  background: #00bfa6;
+}
+
+/* Pie de página */
+footer {
+  text-align: center;
+  font-size: 0.9em;
+  color: #777;
+  margin-top: 50px;
+  padding: 20px;
+  border-top: 1px solid #eee;
+}

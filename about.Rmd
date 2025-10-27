@@ -1,0 +1,8 @@
+---
+title: "Sobre mí"
+output: html_document
+---
+
+Mi nombre es **Germán Torres**, psicólogo sanitario especializado en metodología de las ciencias del comportamiento y de la salud. Desde que empecé a estudiar la carrera me interesó el mundo de la metodología no solo por su rama cuantitativa sino por la epistemológica. 
+
+Hoy en día existen numerosas bases de datos de todo tipo sin enormes dificultades en cuanto al cálculo, pero sin un buen método y unas bases racionales los resultados no serán útiles; por ello, estoy enfocado en transformar la evidencia científica en información relevante para la práctica profesional.

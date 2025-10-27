@@ -1,0 +1,81 @@
+/* ========================
+   ESTILO ESPECÍFICO PARA POSTS
+   ======================== */
+
+/* Fondo con textura ligera o tono diferente */
+body {
+  background: linear-gradient(to bottom, #f6f8f9, #eef3f6);
+  font-family: 'Inter', 'Lato', 'Helvetica Neue', Arial, sans-serif;
+  color: #222;
+  line-height: 1.75;
+}
+
+/* Contenedor del artículo */
+.main-container {
+  max-width: 900px;
+  background: #ffffff;
+  margin: 40px auto;
+  padding: 50px;
+  border-radius: 14px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.05);
+}
+
+/* Título del post */
+h1.title {
+  font-size: 2.2em;
+  color: #0a2540;
+  border-bottom: 2px solid #00bfa6;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+}
+
+/* Enlaces */
+a {
+  color: #007b8a;
+}
+a:hover {
+  color: #00bfa6;
+}
+
+/* Citas y bloques destacados */
+blockquote {
+  border-left: 4px solid #00bfa6;
+  padding-left: 20px;
+  color: #444;
+  font-style: italic;
+}
+
+/* Figuras y gráficos */
+figure {
+  text-align: center;
+  margin: 20px auto;
+}
+figcaption {
+  font-size: 0.9em;
+  color: #666;
+  margin-top: 8px;
+}
+
+/* Código y resultados */
+pre, code {
+  background: #f2f8f8;
+  border-radius: 8px;
+  padding: 0.4em 0.6em;
+}
+
+/* Separador final */
+hr {
+  border-top: 1px solid #ddd;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+/* Pie de página */
+footer {
+  text-align: center;
+  font-size: 0.9em;
+  color: #777;
+  margin-top: 50px;
+  padding: 20px;
+  border-top: 1px solid #eee;
+}

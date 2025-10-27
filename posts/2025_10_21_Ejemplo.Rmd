@@ -1,0 +1,97 @@
+---
+title: "Crítica metodológica: Psychiatric and neuropsychiatric sequelae of COVID-19 within 2 years: a multinational cohort study (Chai et al., 2025)"
+
+output: html_document
+references:
+- id: chai2025
+  accessed:
+    - year: 2025
+      month: 10
+      day: 21
+  author:
+    - family: Chai
+      given: Yi
+    - family: Lam
+      given: Ivan C. H.
+    - family: Man
+      given: Kenneth K. C.
+    - family: Hayes
+      given: Joseph F.
+    - family: Wan
+      given: Eric Y. F.
+    - family: Li
+      given: Xue
+    - family: Chui
+      given: Celine S. L.
+    - family: Lau
+      given: Wallis C. Y.
+    - family: Lin
+      given: Xiaoyu
+    - family: Yin
+      given: Can
+    - family: Fan
+      given: Min
+    - family: Chan
+      given: Esther W.
+    - family: Wong
+      given: Ian C. K.
+    - family: Luo
+      given: Hao
+  citation-key: chai2025
+  container-title: BMC Medicine
+  container-title-short: BMC Medicine
+  DOI: 10.1186/s12916-025-03952-z
+  ISSN: 1741-7015
+  issue: '1'
+  issued:
+    - year: 2025
+      month: 3
+      day: 7
+  page: '144'
+  source: BioMed Central
+  title: "Psychiatric and neuropsychiatric sequelae of COVID-19 within 2\_years: a multinational cohort study"
+  title-short: "Psychiatric and neuropsychiatric sequelae of COVID-19 within 2\_years"
+  type: article-journal
+  URL: https://doi.org/10.1186/s12916-025-03952-z
+  volume: '23'
+---
+
+<style>
+body {
+  text-align: justify;
+}
+</style>
+
+Al analizar estudios desde una óptica metodológica no son tan relevantes los resultados y las conclusiones como sí éstos son coherentes con el tipo de investigación y la validez de los mismos no se mide en si algo es o no "estadísticamente significativo" (ríos de tinta hay sobre este concepto que sigue prevaleciendo en universidades e investigaciones aún hoy en día) sino en si la adquisición del conocimiento ha seguido un proceso que garantice su pertinencia. Para ello, en esta entrada se procede a analizar un artículo reciente de un estudio con grandes bases de datos que aplica diferentes procesos y técnicas que, habitualmente a pequeña escala, se reproducen constantemente en el campo de la salud y el comportamiento.
+
+## Resumen del estudio
+
+En este artículo [@chai2025] los autores plantean un estudio multinacional (Francia, Reino Unido, Alemania, Italia y Estados Unidos) a través de grandes bases de datos para investigar el COVID-19 en cuanto a "secuelas" psiquiátricas; es decir, consultando datos existentes, buscar el efecto del COVID-19 en ciertas afecciones de salud mental. Obtuvieron datos sobre 22 108 925 de personas sin COVID-19 y 303 251 y hallaron diferentes incidencias de problemas de Salud Mental entre los diferentes países, pero solo consideraron relevante la elevación del riesgo para problemas de depresión, ansiedad y trastornos del sueño en Francia y para la demencia en Reino Unido en el largo plazo (entre 6 meses y 2 años). 
+
+Esto es la definición de un estudio observacional epidemiológico con grupo control: se busca dilucidar si la exposición al COVID-19 tuvo un impacto en las personas que lo padecieron en comparación con las que no lo tuvieron.
+
+## Metodología
+
+Al plantear un estudio con muestras tan grandes obtenidas de bases de datos de diferentes países es necesario preguntarse cosas básicas como si los datos son comparables y si los criterios seguidos al formar cada base de datos son los mismos. En este caso, todas las bases de datos son de IQVIA de los diferentes países por lo que a priori son comparables, pero al incluir etiquetas diagnósticas, nunca se puede tener claro que los constructos sean equivalentes. Esto no es debido tanto a que se utilicen diferentes manuales diagnósticos (de hecho, casi siempre se usan el DSM o la CIE) sino a que la práctica clínica implica diferentes valoraciones y métodos en cada lugar, además de que en Salud Mental las dinámicas sociales tienen fuertes influencias. Los datos obtenidos los estandarizaron bajo el protocolo del [*Observational Medical Outcomes Partnership (OMOP)*](https://ohdsi.github.io/CommonDataModel/index.html) *Common Data Model*. Esto es un mero protocolo que estandariza las diferentes condiciones médicas bajo un único paragüas de códigos, haciendo que las diferencias terminológicas desaparezcan PERO no las diferencias en cuanto a práctica clínica. Además, aquí entran también en juego las variables en cuanto a la identificación de los casos de COVID-19: en cada país se siguió un protocolo con instrumentos de cribado diferentes y la consideración de positivo en PCR tuvo unas implicaciones diferentes respecto al registro sanitario.
+
+Cuando obtuvieron los datos finales (después del proceso de exclusión), realizaron un proceso de *Propensity Score Matching*, cuya traducción literal sería algo así como pareamiento por puntuaje de propensión. Este proceso, cuando se tienen tantos datos diferentes, se realiza para reducir el efecto de variables extrañas que puedan influir. Habitualmente estas variables son características socioeconómicas, edad, sexo, etc. Con este proceso se pretende "emparejar" cada caso del grupo diana con un caso equivalente en esas variables de confusión del grupo control. En la base de datos obtenida de Estados Unidos, tuvieron que realizar un muestreo estratificado por limitaciones computacionales al tener demasiadas entradas.
+
+El dato obtenido para hacer las comparaciones fue el *hazard ratio (HR)* que en teoría relaciona la incidencia entre cada grupo (control y diana). La manera habitual de hallarlo es:
+
+$$HR = \frac{Incidencia\ en\ grupo\ diana}{Incidencia\ en\ grupo\ control}$$
+
+Lo que permite ver cuál es la relación entre las incidencias: si es 1, no hay diferencias; si es menor que 1, el COVID-19 sería un factor protector; si es mayor de 1, sería un factor de riesgo para el problema de salud mental correspondiente. La ventaja de usar estas aproximaciones radica en comparar el impacto de una causa en algún efecto de uestro interés.
+
+## Análisis metodológico
+
+El estudio planteado controla muy bien las variables de confusión con métodos adecuados y realiza un correcto análisis de datos para alcanzar unas conclusiones apropiadas, siendo la discusión una auténtica explicación sobre los resultados. El problema principal de utilizar bases de datos tan grandes es la propia obtención de los datos de las mismas: el más mínimo sesgo va a tener importantes efectos en los resultados, puesto que las pruebas de hipótesis estadísticas son sensibles al tamaño muestral utilizado. En caso de usar muestras de miles de personas, un mínimo error sistemático en la recogida de los datos va a tener un gran error en los resultados del estudio.
+
+Para contrarrestar ésto, se podrían optar por un enfoque más descriptivo, dado que incluso pese a que haya una muestra inicial de más de 300 mil personas, sigue siendo una muestra pequeña para poder concluir un efecto generalizado en poblaciones a nivel de países de decenas de millones de personas.
+
+## Referencias
+
+<div id="refs"></div>
+
+<br>
+
+[Volver](../posts.html)

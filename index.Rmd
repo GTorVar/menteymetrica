@@ -1,0 +1,14 @@
+---
+title: "Mente y Métrica"
+subtitle: "Consultoría en Investigación Clínica y Salud Mental"
+output: html_document
+---
+
+Ayudo a profesionales de la salud mental e investigadores a mejorar sus estudios e intervenciones mediante asesoramiento metodológico, análisis de datos y revisión científica.
+
+- Diseño de investigación clínica 
+- Análisis con R y Python  
+- Crítica metodológica de artículos  
+- Formación aplicada en metodología
+
+[Ver publicaciones](posts.html)
