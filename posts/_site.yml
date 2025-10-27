@@ -1,4 +1,4 @@
-output_dir: "../_site/posts"
+output_dir: "../docs/posts"
 navbar:
   title: "Mente y Métrica"
   left:

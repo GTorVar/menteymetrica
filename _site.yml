@@ -1,5 +1,5 @@
 name: "Mente y Método"
-output_dir: "_site"
+output_dir: "docs"
 navbar:
   title: "Mente y Métrica"
   left:
