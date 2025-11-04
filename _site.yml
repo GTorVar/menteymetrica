@@ -18,6 +18,8 @@ navbar:
       href: "https://www.researchgate.net/profile/German-Torres-Varas?ev=hdr_xprf"
     - icon: fa-twitter
       href: "https://x.com/GermanTorVar"
+    - icon: fa-github
+      href: "https://github.com/GTorVar"
 
 output:
   html_document:
