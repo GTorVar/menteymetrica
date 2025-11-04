@@ -1,5 +1,5 @@
 ---
-title: "Crítica metodológica: Psychiatric and neuropsychiatric sequelae of COVID-19 within 2 years: a multinational cohort study (Chai et al., 2025)"
+title: "Reseña metodológica: Psychiatric and neuropsychiatric sequelae of COVID-19 within 2 years: a multinational cohort study (Chai et al., 2025)"
 
 output: html_document
 references:
