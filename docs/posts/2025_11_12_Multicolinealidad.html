@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Multicolinealidad: significado y consecuencias</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="../styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Mente y Métrica</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="../index.html">Inicio</a>
+</li>
+<li>
+  <a href="../about.html">Sobre mí</a>
+</li>
+<li>
+  <a href="../posts.html">Publicaciones</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://www.linkedin.com/in/german-torres-varas">
+    <span class="fa fa-linkedin"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="mailto:torresgvaras@gmail.com">
+    <span class="fa fa-envelope"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.researchgate.net/profile/German-Torres-Varas?ev=hdr_xprf">
+    <span class="fab fa-researchgate"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://x.com/GermanTorVar">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://github.com/GTorVar">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Multicolinealidad: significado y
+consecuencias</h1>
+
+</div>
+
+
+<style>
+body {
+  text-align: justify;
+}
+</style>
+<p>La multicolinealidad es un problema que surge habitualmente en los
+modelos de regresión lineal múltiple. Esta cuestión ha ocupado mucha
+literatura, lo que se pretende es resumir de una manera clara qué
+significa, cuál es su impacto y qué se puede hacer para paliar su
+efecto. Desde una óptica metodológica puede surgir, entre otras, por
+estas razones:</p>
+<ul>
+<li><p>Las variables explicativas seleccionadas están relacionadas entre
+sí</p></li>
+<li><p>Se ha llevado a cabo una suma de dos variables explicativas sin
+darse cuenta (habitual por ejemplo en test si se suman dos ítems o
+subescalas y se usan tanto la suma como los elementos sumados)</p></li>
+<li><p>Se ha usado varias escalas o medidas para un mismo
+constructo</p></li>
+<li><p>Hay más variables que observaciones o el modelo teórico
+específico incluye variables relacionadas</p></li>
+</ul>
+<p>Lo que comparte toda multicolinealidad es que existe una relación
+<em>múltiple</em> entre varias variables explicativas, lo que implica
+que el modelo planteado no cumple los supuestos para realizar una
+correcta interpretación de los resultados en el caso de los modelos de
+regresión lineal (y en sus derivados). En algunos casos, como ocurre con
+LISREL <span class="citation">(Holgado Tello, Suárez Falcón, and Morata
+Ramírez 2019)</span>, la multicolinealidad impide realizar los cálculos
+puesto que la matriz de covarianza no está definida de manera positiva;
+en otras ocasiones los programas mostrarán resultados pero habrá
+problemas como una alta variabilidad en los estimadores, sensibilidad a
+cambios pequeños en los datos o magnitudes y signos poco razonables de
+las estimaciones <span class="citation">del Valle Moreno and Guerra
+Bustillo (2012)</span>.</p>
+<div id="cuál-es-su-impacto" class="section level2">
+<h2>Cuál es su impacto</h2>
+<p>Para este trabajo se simulará una serie de datos (siempre es más
+fácil de explicar con datos que responden estrictamente a lo que se
+pretende) en los que haya una serie de variables predictoras nombradas
+como <span class="math inline">\(X_1\)</span>, <span
+class="math inline">\(X_2\)</span>, etc. y una variable dependiente
+<span class="math inline">\(Y\)</span>, según la ecuación <span
+class="math inline">\(Y = 2X_1 + 3X_2 + X_3 + \epsilon\)</span>, donde
+<span class="math inline">\(\epsilon\)</span> es un error aleatorio.
+Todo el código se moverá en R.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2025</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">20</span><span class="sc">:</span><span class="dv">60</span>, <span class="dv">100</span>, <span class="at">replace =</span> T) <span class="co"># Edad en años</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">15</span>)) <span class="co"># Resultados en un test</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> x1 <span class="sc">*</span> <span class="dv">2</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">10</span>, <span class="dv">10</span>) <span class="co"># Variable relacionada con la edad</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> x1 <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> x2 <span class="sc">+</span> x3 <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">100</span>) <span class="co"># Variable dependiente</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>datos <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(<span class="at">X1 =</span> x1, <span class="at">X2 =</span> x2, <span class="at">X3 =</span> x3, <span class="at">Y =</span> y)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">scatterplotMatrix</span>(datos, <span class="at">smooth =</span> F, <span class="at">regLine =</span> T)</span></code></pre></div>
+<p><img src="2025_11_12_Multicolinealidad_files/figure-html/datos-1.png" width="672" /></p>
+<p>Como se ve en las gráficas, es fácil ver cómo X3 y X1 están
+relacionadas de una manera lineal muy concreta. Este indicador ya es en
+sí mismo una alerta para la colinealidad. Como es lógico, la correlación
+también será alta, especialmente teniendo en cuenta que los métodos de
+cálculo capturan la relación lineal.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">cor</span>(datos[,<span class="sc">-</span><span class="dv">4</span>]), <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##       X1     X2     X3
+## X1  1.00 -0.040  0.927
+## X2 -0.04  1.000 -0.026
+## X3  0.93 -0.026  1.000</code></pre>
+<p>El método numérico más usado para el cálculo de la multicolinealidad
+es la Inflación de Varianza (VIF por sus siglas en inglés), que responde
+a la ecuación <span class="math inline">\(VIF_i = \frac{1}{1 -
+R^2_i}\)</span>. Como se deduce del propio nombre, el cálculo involucra
+<em>cuánto</em> cambia la explicación de la varianza de un modelo al
+cambiar las variables predictoras o explicativas. En el caso del
+ejemplo, usando el paquete car, se obtiene:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> datos, Y <span class="sc">~</span> X1 <span class="sc">+</span> X2 <span class="sc">+</span> X3)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">print</span>(car<span class="sc">::</span><span class="fu">vif</span>(modelo), <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##  X1  X2  X3 
+## 7.1 1.0 7.1</code></pre>
+<p>Lo cual indica una alta colinealidad de X1 y X3 (como era obvio). Los
+valores VIF mayores a 5 siempre nos deben hacer sospechar de problemas
+de colinealidad y cuando son mayores a 10 el error introducido en el
+modelo puede tener mucho impacto. Para entender el impacto sobre el
+modelo se debe eliminar la variable independiente sobre la que se tenga
+sospecha de estar relacionada con otra. En este caso será X3, pero aquí
+es dónde entra en juego la decisión del investigador: cuando se vean dos
+variables independientes relacionadas hay que decidir, por modelo
+teórico o por lógica, cuál es la que puede tener un efecto en la
+investigación y cuál simplemente está relacionada con ésta. En ciertos
+casos será más evidente (por ejemplo, si una variable es edad y otra
+renta, es esperable que la renta aumente con la edad), en otros habrá
+que buscar más evidencia a favor y en contra de cada variable.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(modelo)<span class="sc">$</span>coefficients, <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)    102.5      72.66     1.4   0.1614
+## X1               4.0       2.20     1.8   0.0703
+## X2               2.0       0.64     3.1   0.0023
+## X3               1.1       0.99     1.2   0.2461</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>modelo2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> datos, Y <span class="sc">~</span> X1 <span class="sc">+</span> X2)</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(modelo2)<span class="sc">$</span>coefficients, <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)    109.8      72.53     1.5  1.3e-01
+## X1               6.4       0.83     7.7  9.3e-12
+## X2               2.0       0.64     3.2  2.1e-03</code></pre>
+<p>En el modelo2 sendas variables X1 y X2 se pueden considerar
+relevantes, mientras que en el primer modelo solo X2 muestra evidencia.
+Curiosamente sabemos que la variable Y sigue una ecuación concreta en la
+que participan las 3 variables de cierta manera y es el término de error
+el que introduce la distorsión que termina por modificar la ecuación del
+modelo.</p>
+<p><img src="2025_11_12_Multicolinealidad_files/figure-html/unnamed-chunk-5-1.png" width="672" /><img src="2025_11_12_Multicolinealidad_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+<p>En los ajustes de las regresiones se ve el impacto que tiene sacar X3
+del modelo matemático sobre el ajuste de X1, mientras que X2 mantiene
+prácticamente sus valores. Aquí reside uno de los principales problemas
+prácticos de la multicolinealidad: <strong>el ajuste de las variables no
+es fiable, aumenta los errores estándar y el valor del estimador no es
+preciso</strong>.</p>
+<p>Hay que tener en cuenta que la correlación y la inflación de varianza
+no son efectivos cuando la relación entre variables no es lineal. Por
+ejemplo, si una variable <span class="math inline">\(X_4\)</span> tiene
+una relación exponencial que sigue la ecuación <span
+class="math inline">\(X_4 = e^{\frac{3X_1}{10}}/10^{7}\)</span> (para
+mantener los números en un orden aceptable para la regresión lineal), la
+inflación de varianza para la variable <span
+class="math inline">\(X_4\)</span> es menor a 5, incluso está en un
+límite aceptable según los criterios VIF más usados. En este caso la
+correlación lineal es de <span class="math inline">\(0,68\)</span> por
+puro artefacto matemático, detalle que se ve más claro en la gráfica de
+dispersión.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2025</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>x4 <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="dv">3</span><span class="sc">*</span>x1<span class="sc">/</span><span class="dv">10</span>) <span class="sc">/</span> <span class="fl">1e7</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>datos<span class="sc">$</span>X4 <span class="ot">&lt;-</span> x4</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>datos<span class="sc">$</span>Y <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">*</span> datos<span class="sc">$</span>X1 <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> datos<span class="sc">$</span>X2 <span class="sc">+</span> datos<span class="sc">$</span>X3 <span class="sc">+</span> datos<span class="sc">$</span>X4 <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">100</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>datos <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">select</span>(X1, X2, X3, X4, Y)</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>modelo3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> datos, Y <span class="sc">~</span> X1 <span class="sc">+</span> X2 <span class="sc">+</span> X3 <span class="sc">+</span> X4)</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="fu">print</span>(car<span class="sc">::</span><span class="fu">vif</span>(modelo3), <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##  X1  X2  X3  X4 
+## 7.7 1.0 7.1 1.9</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">cor</span>(datos[,<span class="sc">-</span><span class="dv">5</span>]), <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##       X1     X2     X3    X4
+## X1  1.00 -0.040  0.927 0.675
+## X2 -0.04  1.000 -0.026 0.084
+## X3  0.93 -0.026  1.000 0.646
+## X4  0.68  0.084  0.646 1.000</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">scatterplotMatrix</span>(datos, <span class="at">smooth =</span> F, <span class="at">regLine =</span> T)</span></code></pre></div>
+<p><img src="2025_11_12_Multicolinealidad_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>En la gráfica, sin embargo, se observa cómo esa correlación
+exponencial tiene un impacto importante en el modelo. Aunque el
+tratamiento de variables exponenciales no es el objetivo de esta
+entrada, se puede ver cómo afecta también a los coeficientes del
+modelo.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(modelo3)<span class="sc">$</span>coefficients, <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)    23.23      86.67    0.27  7.9e-01
+## X1              4.06       2.46    1.65  1.0e-01
+## X2              3.02       0.69    4.37  3.2e-05
+## X3              0.33       1.06    0.31  7.5e-01
+## X4             -7.24       8.46   -0.86  3.9e-01</code></pre>
+<p>Y a su <span class="math inline">\(R^2\)</span>.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="fu">summary</span>(modelo3)<span class="sc">$</span>r.square</span></code></pre></div>
+<pre><code>## [1] 0.2890348</code></pre>
+</div>
+<div id="qué-se-puede-hacer" class="section level2">
+<h2>Qué se puede hacer</h2>
+<p>Como es habitual en la metodología de investigación, el tratamiento
+de las variables multicolineales depende del objetivo de la
+investigación, del modelo teórico y de cómo se han obtenido los datos.
+Si, como en el ejemplo, se puede intuir o saber que una variable puede
+estar relacionada con otra de una manera lógica o apoyada en la
+evidencia, se puede eliminar la variable que sea menos relevante para el
+modelo teórico. Sin embargo, esto es un caso particular y seguramente
+ideal, puesto que el Modelo Lineal General, del que surgen estos
+conceptos, se aplica en multitud de circunstancias, no siempre de una
+manera evidente para el investigador. Es el caso, por ejemplo, de los
+análisis multigrupo con variables categóricos. En estos enfoques aún es
+más importante el discernimiento entre los efectos y las interacciones
+de tipo colineal entre las variables.</p>
+<p>Cuando no se quiere o no se puede eliminar o controlar las variables
+colineales, el enfoque estadístico puede virar hacia una regularización
+de los efectos. Estos enfoques, aunque cada uno con sus peculiaridades,
+incorporan penalizaciones en el ajuste de Mínimos Cuadrados Ordinarios
+(MCO u OLS en inglés) que se usa en las regresiones lineales habituales.
+El paso previo al uso de estas estrategias es la estandarización o
+normalización de los predictores, puesto que necesitan hallarse en la
+misma escala para no incorporar sesgos aún mayores.</p>
+<div id="regularización-ridge-o-tikhonov" class="section level3">
+<h3>Regularización Ridge o Tikhonov</h3>
+<p>Penaliza la suma de coeficientes elevados sin llegar a convertirlos
+en 0, minimizando la función:</p>
+<p><span class="math display">\[\sum (y_i - \bar{y_i})^2 + \lambda \sum
+\beta_j^2\]</span></p>
+<p>Por un lado, el primer término corresponde a la aproximación de
+mínimos cuadrados ordinarios mientras que la segunda es la penalización
+por coeficiente. Variando el valor de <span
+class="math inline">\(\lambda\)</span> se obtienen diferentes ecuaciones
+de regresión, pero existe un valor mínimo óptimo que puede ser calculado
+de manera sencilla en R.</p>
+<p>Para empezar, se deben estandarizar los valores a valores normales
+con media 0 y desviación típica de 1, pero la función
+<code>glmnet::glmnet()</code> del paquete glmnet estandariza
+automáticamente los valores, a no ser que se le indique lo contrario. Al
+indicar alpha = 0 se calcula la regresión ridge, indicando alpha = 1 se
+realizaría una regresión LASSO. Para saber qué coeficiente lambda se
+debe elegir, se puede usar la función
+<code>glmnet::cv.glmnet()</code>.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2025</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>XRidge <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span>., datos[,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]) <span class="co"># Se convierten los datos en un objeto de términos apropiado</span></span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>lambda_minima <span class="ot">&lt;-</span> glmnet<span class="sc">::</span><span class="fu">cv.glmnet</span>(XRidge, datos<span class="sc">$</span>Y, <span class="at">alpha =</span> <span class="dv">0</span>)<span class="sc">$</span>lambda.min</span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>ridge <span class="ot">&lt;-</span> glmnet<span class="sc">::</span><span class="fu">glmnet</span>(XRidge, datos<span class="sc">$</span>Y, <span class="at">alpha =</span> <span class="dv">0</span>, <span class="at">lambda =</span> lambda_minima)</span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a><span class="fu">coef</span>(ridge)</span></code></pre></div>
+<pre><code>## 5 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                     s0
+## (Intercept) 99.6037027
+## (Intercept)  .        
+## X1           2.4265803
+## X2           2.5853006
+## X3           0.6255277</code></pre>
+<p>Con esta regresión el modelo que reduce la colinealidad es <span
+class="math inline">\(Y = 99,60 + 2,43 X_1 + 2,59X_2 + 0,63X_3\)</span>,
+no muy lejos de la ecuación original. Se ve cómo aumenta el término de
+<span class="math inline">\(X_1\)</span> y disminuye el de <span
+class="math inline">\(X_3\)</span> ligeramente debido a la
+colinealidad.</p>
+<p>Este enfoque permite mantener todas las variables que se crean
+relevantes en el modelo, mientras que en el método LASSO selecciona las
+variables según criterios estadísticos, por lo que puede alejar el
+modelo de la teoría y se debería usar con mayor precaución, teniendo en
+cuenta otras alternativas de reducción de dimensionalidad. Pero eso es
+otro tema…</p>
+</div>
+</div>
+<div id="referencias" class="section level2">
+<h2>Referencias</h2>
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
+<div id="ref-hernandez" class="csl-entry">
+Hernández, Freddy, Olga Usuga, and Mauricio Mazo. n.d. <em>Modelos de
+Regresión Con R</em>. Accessed November 12, 2025. <a
+href="https://fhernanb.github.io/libro_regresion/multicoli.html">https://fhernanb.github.io/libro_regresion/multicoli.html</a>.
+</div>
+<div id="ref-holgado2019" class="csl-entry">
+Holgado Tello, Francisco Pablo, Juan Carlos Suárez Falcón, and María de
+los Ángeles Morata Ramírez. 2019. <em>Modelos de Ecuaciones
+Estructurales, desde el <span>“Path Analysis”</span> al Análisis
+Multigrupo: Una Guía Práctica con LISREL</em>. Editorial Sanz Y Torres
+S.l. <a
+href="https://www.librosuned.com/LU26100/Modelos-de-ecuaciones-estructurales,-desde-el-Path-Analysis-al-an%C3%A1lisis-multigrupo.aspx">https://www.librosuned.com/LU26100/Modelos-de-ecuaciones-estructurales,-desde-el-Path-Analysis-al-an%C3%A1lisis-multigrupo.aspx</a>.
+</div>
+<div id="ref-delvalle2012" class="csl-entry">
+Valle Moreno, Juan del, and Walkiria Guerra Bustillo. 2012. <span>“La
+Multicolinealidad En Modelos de Regresión Lineal Múltiple.”</span>
+<em>Revista Ciencias Técnicas Agropecuarias</em> 21 (4): 80–83. <a
+href="http://scielo.sld.cu/scielo.php?script=sci_abstract&amp;pid=S2071-00542012000400013&amp;lng=es&amp;nrm=iso&amp;tlng=pt">http://scielo.sld.cu/scielo.php?script=sci_abstract&amp;pid=S2071-00542012000400013&amp;lng=es&amp;nrm=iso&amp;tlng=pt</a>.
+</div>
+</div>
+<p><br></p>
+<p><a href="../posts.html">Volver</a></p>
+</div>
+
+<footer>
+    <p>🄯 2025 Germán Torres Varas </p>
+    <p>
+    <a href="https://www.linkedin.com/in/german-torres-varas/"> 
+        <span class="fa fa-linkedin"></span>
+    </a>    ·    
+    <a href="mailto:torresgvaras@gmail.com">
+        <span class="fa fa-envelope"></span>
+    </a>    ·   
+    <a href="https://www.researchgate.net/profile/German-Torres-Varas?ev=hdr_xprf">
+        <span class="fab fa-researchgate"></span>
+    </a>    ·   
+    <a href="https://x.com/GermanTorVar">
+        <span class="fa fa-twitter"></span>
+    </a>    ·   
+    <a href="https://github.com/GTorVar">
+        <span class="fa fa-github"></span>
+    </a>
+    </p>
+</footer>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
