@@ -1,0 +1,102 @@
+---
+title: "Reseña metodológica: Mild Dehydration Affects Mood in Healthy  Young Women (Armstrong et al., 2012)"
+
+output: html_document
+references:
+- id: armstrong2012
+  accessed:
+    - year: 2025
+      month: 11
+      day: 24
+  author:
+    - family: Armstrong
+      given: Lawrence E.
+    - family: Ganio
+      given: Matthew S.
+    - family: Casa
+      given: Douglas J.
+    - family: Lee
+      given: Elaine C.
+    - family: McDermott
+      given: Brendon P.
+    - family: Klau
+      given: Jennifer F.
+    - family: Jimenez
+      given: Liliana
+    - family: Le Bellego
+      given: Laurent
+    - family: Chevillotte
+      given: Emmanuel
+    - family: Lieberman
+      given: Harris R.
+  citation-key: armstrong2012
+  container-title: The Journal of Nutrition
+  container-title-short: The Journal of Nutrition
+  DOI: 10.3945/jn.111.142000
+  ISSN: 0022-3166
+  issue: '2'
+  issued:
+    - year: 2012
+      month: 2
+      day: 1
+  page: 382–388
+  source: ScienceDirect
+  title: Mild Dehydration Affects Mood in Healthy Young Women1,2
+  type: article-journal
+  URL: https://www.sciencedirect.com/science/article/pii/S0022316622028899
+  volume: '142'
+---
+
+<style>
+body {
+  text-align: justify;
+}
+</style>
+
+¿La deshidratación afecta al estado de ánimo en las mujeres? Hace poco tiempo me fijé en un post en redes sociales donde se citaba un estudio que había hallado que una deshidratación del $1,36\%$ resultaba en un estado de ánimo bajo, mayor percepción de dificultad de la tarea, menor concentración y síntomas de dolor de cabeza. Se usaba tal afirmación para hacer notar alguna broma, una anécdota más de las redes sociales, pero siempre que veo que se expande (*viraliza*) algún mensaje que se *basa en la evidencia* (expresión que requeriría un análisis propio) me gusta acudir a la fuente para ver qué sentido, si lo tiene, se le da en el estudio original.
+
+En el nivel más obvio, la experiencia diaria nos dice a todos que la correcta hidratación es esencial para un funcionamiento normal de nuestros cuerpos, no se niega lo evidente en ningún momento. Pero que tal o cual estudio concluya que un nivel de deshidratación produce unos efectos y que éstos puedan ser generalizados en una población tan extensa y variada hace saltar la alarma. ¿Puede un estudio concluir tales causas a los efectos? ¿Se puede generalizar a partir de un experimento único? 
+
+## Resumen del estudio
+
+El estudio que analizamos hoy es un experimento realizado por @armstrong2012. Durante el experimento sometieron a diferentes condiciones a un mismo grupo de 25 mujeres: 
+
+1. Deshidratación inducida por ejercicio más una cápsula de placebo
+
+2. Deshidratación inducida por ejercicio más una cápsula de diurético
+
+3. Hidratación correcta más una cápsula de placebo
+
+El orden de presentación de los tratamientos a cada participante fue aleatorizado y se contrabalanceó. Este tipo de diseños experimentales presenta muchas fortalezas: al presentar el tratamiento que se desea analizar al mismo grupo de participantes que pasan por las fases de control, se puede controlar muy bien el efecto del tratamiento y la variabilidad individual. Sin embargo, el coste del estudio aumenta al tener que realizar tantas fases experimentales y, en función de las medidas que se tomen, se debe tener en cuenta el efecto de aprendizaje sobre las pruebas que involucran test o la destreza motora. En este estudio, para intentar controlar ese efecto, se invitó a las participantes a realizar el mismo tipo de tareas cognitivas y comportamentales hasta alcanzar un nivel que se consideró asintótico en su desempeño.
+
+En cuanto a medidas de la hidratación, se controló el tipo de agua que se consumía, el punto de ciclo menstrual en el que se encontraban (usaban anticonceptivos orales, se realizaron las tareas durante la semana de placebo), la comida y las horas de sueño previas al experimento. Las condiciones experimentales se controlaron de manera apropiada, la única diferencia apreciable era la condición experimental, que se realizaba dos veces en el día.
+
+Entre las medidas subjetivas para el estudio estaban el desempeño en tareas cognitivas (vigilancia, tiempos de reacción, aprendizaje, memoria de trabajo y razonamiento lógico), el estado de ánimo (cuestionario POMS), la percepción de intensidad del esfuerzo físico del ejercicio y la percepción de intensidad del dolor muscular. La medida de deshidratación fue la pérdida de masa corporal (teniendo en cuenta la ingesta de líquido y la micción), también se controlaron el ritmo cardíaco y la temperatura interna. La tarea PVT (mide tiempos de reacción), el POMS y el VAS (medida de esfuerzo para realizar los test) se realizaron tanto durante el tiempo de descanso como durante el ejercicio.
+
+## Metodología
+
+Como se ve en el resumen del estudio, el diseño experimental fue cauto, con mucho control sobre variables de confusión que pudieran estar involucradas basándose en estudios previos. Aunque de manera ideal se debería poder controlar una infinitud de variables para que fuera únicamente diferente el nivel de hidratación, se debe ser realistas en este punto. 
+
+Se marcó a priori que en las pérdidas mayores al $1\%$ de masa corporal se realizase una comparación de todas las variables dependientes mediante el llamado "t-test" (la prueba T de Student). Después, sin tener en cuenta la condición de ejercicio (con placebo o con diurético), se compararon los resultados con la condición control (buena hidratación con placebo). En este punto los autores aclaran que obtuvieron $\leq 25$ pares de datos (se perdió un dato en las horas de sueño en la condición de hidratación correcta).
+
+Como parte importante, aunque no afecta directamente al estudio, cabe mencionar que varios autores eran investigadores de Danone, compañía que financió en parte el estudio y proveyó el agua para la hidratación de las participantes.
+
+## Análisis metodológico
+
+El diseño experimental de este estudio constituye una buena definición de control de variables y constituye un caso especial de "cuadrado latino" donde cada participante pasa por las tres condiciones experimentales. Sin embargo, no aprovechan el potencial de este diseño al realizar un análisis con pruebas T de Student. Esta prueba trata las condiciones experimentales con deshidratación $\geq 1\%$ como un grupo y la condición control como otro grupo, buscando diferencias en las medias de cada grupo. Un análisis de regresión que tuviera en cuenta a cada participante como un efecto aleatorio y la condición experimental como factor de efectos fijos habría conseguido controlar de manera matemática el efecto debido a cada participante. Quizás no cambiarían las conclusiones, pero se podría aprovechar la recolección de datos para mirar la evolución según las condiciones experimentales.
+
+Otro punto a resaltar, en los resultados que obtienen, es que no se realiza un análisis de mediadores o moderadores: pese a que se controlan muchas variables, no se reporta si se ha buscado si las diferencias que encuentra el estudio se puedan explicar mejor debido a la temperatura interna o el ritmo cardíaco. La deshidratación y estas dos variables pueden tener una estrecha relación, con un análisis de regresión podría verse qué modelo explica mejor los datos. 
+
+Pero el principal problema proviene de algo más fundamental: teniendo los datos de deshidratación "en bruto", los usan para convertirlos en una categoría de "deshidratación $\geq 1\%$". Pese a que se justifica esta categoría como aquella en la que en estudios previos se ha encontrado una mínima diferencia, no se aprovecha para realizar un ajuste simple: ¿más deshidratación se relaciona con menos rendimiento? ¿más deshidratación se relaciona con más temperatura interna? ¿más deshidratación se relaciona con menor puntuación en el POMS? Cuando se tiene un diseño experimental bien planteado, como es el caso, se puede investigar la relación entre variables de una manera más fidedigna, puesto que tampoco se puede saber en qué porcentaje de deshidratación se siente una persona deshidratada, dados a medir el estado de ánimo. La categorización de una variable continua puede producir distorsiones, tanto a favor como en contra de las hipótesis de los investigadores. 
+
+En cuanto a los resultados, conviene siempre ser más precabido en la generalización de un experimento con 25 mujeres, puesto que la capacidad de generalización de un experimento, la validez externa que refieren los manuales, no proviene del control experimental, sino de la elección de la muestra. Toda la muestra son mujeres jóvenes y sanas que además toman una medicación (el anticoncpetivo), no se debe usar un lenguaje que pueda dar a entender que lo sucedido en unas condiciones controladas puedan darse en un entorno natural y en una población más general del mismo modo.
+
+Por último, al ser un estudio financiado por una compañía que vende agua embotellada, reportar los datos de una manera más transparente o con modelos explicativos más allá de la creación de una categoría "deshidratado" puede contribuir a disminuir la reticencia de ciertos lectores a creer en la fiabilidad de los resultados.
+
+## Referencias
+
+<div id="refs"></div>
+
+<br>
+
+[Volver](../posts.html)

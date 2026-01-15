@@ -117,3 +117,33 @@ footer {
   padding: 20px;
   border-top: 1px solid #eee;
 }
+
+/* Configuración de las tablas*/
+.psico-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+.psico-table th {
+  background-color: #f3f4f6;
+  text-align: left;
+  padding: 10px;
+  font-weight: 600;
+}
+
+.psico-table td {
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+}
+
+.psico-table input {
+  width: 100%;
+  padding: 6px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+

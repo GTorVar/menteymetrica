@@ -3,6 +3,8 @@ title: "Publicaciones"
 output: html_document
 ---
 
+- [Reseña metodológica: Mild Dehydration Affects Mood in Healthy  Young Women (Armstrong et al., 2012)](posts/2026_01_15_ResenaArmstrong.html)
+
 - [Multicolinealidad: significado y consecuencias](posts/2025_11_12_Multicolinealidad.html)
 
 - [Reseña metodológica: Psychiatric and neuropsychiatric sequelae of COVID-19 within 2 years: a multinational cohort study (Chai et al., 2025)](posts/2025_10_21_ResenaChai2025.html)
