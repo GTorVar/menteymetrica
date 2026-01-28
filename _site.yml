@@ -9,6 +9,8 @@ navbar:
       href: about.html
     - text: "Publicaciones"
       href: posts.html
+    - text: "Recursos"
+      href: recursos.html
   right:
     - icon: fa-linkedin
       href: "https://www.linkedin.com/in/german-torres-varas"

@@ -6,9 +6,14 @@ output: html_document
 
 Ayudo a profesionales de la salud mental e investigadores a mejorar sus estudios e intervenciones mediante asesoramiento metodológico, análisis de datos y revisión científica.
 
-- Diseño de investigación clínica 
-- Análisis con R y Python  
-- Crítica metodológica de artículos  
-- Formación aplicada en metodología
+- Análisis Estadístico Avanzado: desde modelos lineales hasta análisis psicométricos complejos (AFE/AFC, TRI) y SEM utilizando R y Python
+- Investigación reproducible: automatización de informes y limpieza de datos para que tus resultados sean robustos y transparentes
+- Desarrollo de herramientas: creación de software ad-hoc (Tkinter, HTML+JS) y visualizaciones interactivas para el seguimiento de variables clínicas
+- Asesoría metodológica: soporte técnico para TFG, TFM y otras investigaciones
 
-[Ver publicaciones](posts.html)
+<br>
+
+
+   [Ver publicaciones](posts.html)
+
+   [Ver recursos](recursos.html)

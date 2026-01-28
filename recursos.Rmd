@@ -1,0 +1,6 @@
+---
+title: "Recursos"
+output: html_document
+---
+
+- [Herramienta PHQ-9](posts/2026_01_28_PHQ9.html)

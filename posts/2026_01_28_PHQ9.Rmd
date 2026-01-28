@@ -1,0 +1,385 @@
+---
+title: "Herramienta PHQ-9"
+
+output: html_document
+references:
+- id: gonzalez-blanch2018
+  accessed:
+    - year: 2026
+      month: 1
+      day: 28
+  author:
+    - family: González-Blanch
+      given: César
+    - family: Medrano
+      given: Leonardo Adrián
+    - family: Muñoz-Navarro
+      given: Roger
+    - family: Ruíz-Rodríguez
+      given: Paloma
+    - family: Moriana
+      given: Juan Antonio
+    - family: Limonero
+      given: Joaquín T.
+    - family: Schmitz
+      given: Florian
+    - family: Cano-Vindel
+      given: Antonio
+    - family: Group
+      given: on behalf of the PsicAP Research
+  citation-key: gonzalez-blanch2018
+  container-title: PLOS ONE
+  container-title-short: PLOS ONE
+  DOI: 10.1371/journal.pone.0193356
+  ISSN: 1932-6203
+  issue: '2'
+  issued:
+    - year: 2018
+      month: 2
+      day: 23
+  language: en
+  page: e0193356
+  publisher: Public Library of Science
+  source: PLoS Journals
+  title: >-
+    Factor structure and measurement invariance across various demographic
+    groups and over time for the PHQ-9 in primary care patients in Spain
+  type: article-journal
+  URL: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0193356
+  volume: '13'
+
+- id: kroenke2001
+  accessed:
+    - year: 2026
+      month: 1
+      day: 28
+  author:
+    - family: Kroenke
+      given: Kurt
+    - family: Spitzer
+      given: Robert L.
+    - family: Williams
+      given: Janet B. W.
+  citation-key: kroenke2001
+  container-title: Journal of General Internal Medicine
+  container-title-short: J GEN INTERN MED
+  DOI: 10.1046/j.1525-1497.2001.016009606.x
+  ISSN: 1525-1497
+  issue: '9'
+  issued:
+    - year: 2001
+      month: 9
+      day: 1
+  language: en
+  page: 606–613
+  source: Springer Link
+  title: The PHQ-9
+  type: article-journal
+  URL: https://doi.org/10.1046/j.1525-1497.2001.016009606.x
+  volume: '16'
+
+- id: spitzer1999
+  accessed:
+    - year: 2026
+      month: 1
+      day: 28
+  author:
+    - family: Spitzer
+      given: Robert L.
+    - family: Kroenke
+      given: Kurt
+    - family: Williams
+      given: Janet B. W.
+    - literal: and the Patient Health Questionnaire Primary Care Study Group
+  citation-key: spitzer1999
+  container-title: JAMA
+  container-title-short: JAMA
+  DOI: 10.1001/jama.282.18.1737
+  ISSN: 0098-7484
+  issue: '18'
+  issued:
+    - year: 1999
+      month: 11
+      day: 10
+  page: 1737–1744
+  source: Silverchair
+  title: >-
+    Validation and Utility of a Self-report Version of PRIME-MDThe PHQ Primary
+    Care Study
+  type: article-journal
+  URL: https://doi.org/10.1001/jama.282.18.1737
+  volume: '282'
+---
+
+```{=html}
+<style>
+body {
+  text-align: justify;
+}
+</style>
+```
+
+Esta herramienta corrige el Cuestionario PHQ9 [@kroenke2001; @spitzer1999] en su versión española [@gonzalez-blanch2018] y genera un informe en PDF reproducible y con explicación gráfica de resultados.
+
+```{=html}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+
+<div id="app-clinica" style="border: 1px solid #ddd; padding: 25px; border-radius: 10px; background: #fdfdfd; font-family: sans-serif; max-width: 700px; margin: auto;">
+  <h3 style="color: #2c3e50; text-align: center;">Cuestionario de Salud del Paciente (PHQ-9)</h3>
+  <p style="font-style: italic; color: #555; text-align: center;">Durante las 2 últimas semanas, ¿qué tan a menudo le han afectado alguno de los siguientes problemas?</p>
+  
+  <label>Nombre:</label>
+  <input id="nombre" type="text">
+  <label>Evaluador:</label>
+  <input id="evaluador" type="text">
+  <br>
+  <label>Fecha:</label>
+  <input id="fecha" type="date" format="dd/mm/aaaa">
+  
+  <div id="preguntas"> 
+    <label>1. Poco interés o placer para hacer las cosas:</label><br>
+    <select id="q1" class="item-phq">
+      <option value="0">Nunca (0)</option>
+      <option value="1">Varios días (1)</option>
+      <option value="2">Más de la mitad de los días (2)</option>
+      <option value="3">Casi todos los días (3)</option>
+    </select>
+    <br>
+    <label>2. Sentirse triste, deprimido o sin esperanzas:</label><br>
+    <select id="q2" class="item-phq">
+      <option value="0">Nunca (0)</option>
+      <option value="1">Varios días (1)</option>
+      <option value="2">Más de la mitad de los días (2)</option>
+      <option value="3">Casi todos los días (3)</option>
+    </select>
+    <br>
+    <label>3. Dificultad para conciliar o mantener el sueño o dormir demasiado:</label><br>
+    <select id="q3" class="item-phq">
+      <option value="0">Nunca (0)</option>
+      <option value="1">Varios días (1)</option>
+      <option value="2">Más de la mitad de los días (2)</option>
+      <option value="3">Casi todos los días (3)</option>
+    </select>
+    <br>
+    <label>4. Sentirse cansado o tener poca energía:</label><br>
+    <select id="q4" class="item-phq">
+      <option value="0">Nunca (0)</option>
+      <option value="1">Varios días (1)</option>
+      <option value="2">Más de la mitad de los días (2)</option>
+      <option value="3">Casi todos los días (3)</option>
+    </select>
+    <br>
+    <label>5. Poco apetito o comer en exceso:</label><br>
+    <select id="q5" class="item-phq">
+      <option value="0">Nunca (0)</option>
+      <option value="1">Varios días (1)</option>
+      <option value="2">Más de la mitad de los días (2)</option>
+      <option value="3">Casi todos los días (3)</option>
+    </select>
+    <br>
+    <label>6. Sentirse mal sobre sí mismo (o que es un fracaso o que se ha decepcionado a usted o su familia):</label><br>
+    <select id="q6" class="item-phq">
+      <option value="0">Nunca (0)</option>
+      <option value="1">Varios días (1)</option>
+      <option value="2">Más de la mitad de los días (2)</option>
+      <option value="3">Casi todos los días (3)</option>
+    </select>
+    <br>
+    <label>7. Dificultad para concentrarse en actividades como leer o ver la televisión:</label><br>
+    <select id="q7" class="item-phq">
+      <option value="0">Nunca (0)</option>
+      <option value="1">Varios días (1)</option>
+      <option value="2">Más de la mitad de los días (2)</option>
+      <option value="3">Casi todos los días (3)</option>
+    </select>
+    <br>
+    <label>8. Moverse o hablar tan despacio que otras personas pueden haberlo notado. <br> O lo contrario, sentirse tan nervioso e inquieto que ha estado moviéndose más de lo usual:</label><br>
+    <select id="q8" class="item-phq">
+      <option value="0">Nunca (0)</option>
+      <option value="1">Varios días (1)</option>
+      <option value="2">Más de la mitad de los días (2)</option>
+      <option value="3">Casi todos los días (3)</option>
+    </select>
+    <br>
+    <label>9. Pensamientos de que estaría mejor muerto o de lastimarse a usted mismo de alguna manera:</label><br>
+    <select id="q9" class="item-phq">
+      <option value="0">Nunca (0)</option>
+      <option value="1">Varios días (1)</option>
+      <option value="2">Más de la mitad de los días (2)</option>
+      <option value="3">Casi todos los días (3)</option>
+    </select>
+    <br>
+    <br><br>
+    
+    <label>Si usted marcó cualquiera de los problemas, ¿qué tan difícil han afectado estos problemas en hacer su trabajo, encargarse de tareas del hogar, o llevarse bien con otras personas?</label><br>
+    <select id="q10" class="item-phq">
+      <option value="0">Para nada difícil</option>
+      <option value="1">Un poco difícil</option>
+      <option value="2">Muy difícil</option>
+      <option value="3">Extremadamente difícil</option>
+    </select>
+    <br>
+  
+  </div>
+  
+  <button onclick="generarInforme()" style="background-color: #2980b9; color: white; border: none; padding: 15px; border-radius: 5px; width: 100%; cursor: pointer; font-size: 16px; font-weight: bold; margin-top: 15px;">
+    Generar Informe PDF
+  </button>
+</div>
+
+<script>
+function generarInforme() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  const pageWidth = doc.internal.pageSize.getWidth();
+  
+  // Fondo
+  doc.setFillColor(245, 250, 255);
+  doc.rect(0, 0, pageWidth, 297, 'F');
+
+  // Cabecera
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(16);
+  doc.setTextColor(44, 62, 80);
+  doc.text("INFORME RESULTADOS PHQ-9", pageWidth / 2, 20, { align: "center" });
+  
+  //Nombre, evaluador y fecha
+  const nombre = document.getElementById("nombre").value;
+  const evaluador = document.getElementById("evaluador").value;
+  const fecha = document.getElementById("fecha").value;
+  
+  doc.setFontSize(11);
+  doc.text(`Nombre: ${nombre}`, 20, 35);
+  doc.text(`Evaluador: ${evaluador}`, 80, 35);
+  doc.text(`Fecha: ${fecha}`, 140, 35);
+  
+  
+  // Datos y Tabla
+  const labels = ["Interés", "Tristeza", "Sueño", "Energía", "Apetito", "Autoestima", "Concentración", "Psicomotricidad", "Ideación suicida", "Dificultad percibida"];
+  let total = 0;
+  let datosTabla = [];
+  let item9Value = parseInt(document.getElementById('q9').value);
+
+  for(let i=1; i<=10; i++) {
+    let v = parseInt(document.getElementById('q' + i).value);
+    if(i <=9) total += v;
+    datosTabla.push([i, labels[i-1], v]);
+  }
+
+  doc.autoTable({
+    head: [['Item', 'Medida', 'Puntos']],
+    body: datosTabla,
+    startY: 45,
+    styles: { fontSize: 9 },
+    headStyles: { fillColor: [41, 128, 185] }
+  });
+
+  let currentY = doc.lastAutoTable.finalY + 15;
+
+  // Resultado Principal y Corte Español
+  doc.setFontSize(14);
+  doc.text(`Puntuación Total: ${total}`, 20, currentY);
+  
+  let interpretacion = total >= 12 ? "SINTOMATOLOGÍA CLÍNICA (corte en muestras españolas >= 12)" : "Sintomatología subclínica";
+  doc.setFontSize(11);
+  doc.setTextColor(total >= 12 ? 180 : 50, 0, 0);
+  doc.text(`Resultado: ${interpretacion}`, 20, currentY + 7);
+
+  // ALERTA ÍTEM 9 (SEGURIDAD)
+  if (item9Value > 0) {
+    doc.setFillColor(255, 230, 230);
+    doc.setDrawColor(200, 0, 0);
+    doc.rect(15, currentY + 15, pageWidth - 30, 15, 'FD');
+    doc.setTextColor(200, 0, 0);
+    doc.setFont("helvetica", "bold");
+    doc.text("ALERTA: Presencia de pensamientos de autolesión o muerte. Valorar riesgo inmediato.", pageWidth/2, currentY + 24, {align: "center"});
+  }
+
+  // Ayuda Visual: Severidad
+  doc.setTextColor(0);
+  doc.setFont("helvetica", "normal");
+  doc.text("Interpretación Visual de la Severidad:", 20, currentY + 40);
+  
+  const colores = [[220,220,220], [255,240,150], [255,180,100], [240,100,100]];
+  const niveles = ["0-4 Mínima", "5-9 Leve", "10-14 Mod.", "15+ Grave"];
+  const bloquesX = [20, 65, 110, 155]; // Posiciones X de cada bloque
+  const anchoBloque = 40;
+  
+  // 1. Dibujar los bloques de colores
+  for(let j=0; j<4; j++) {
+    doc.setFillColor(colores[j][0], colores[j][1], colores[j][2]);
+    doc.rect(bloquesX[j], currentY + 50, anchoBloque, 8, 'F'); // Subimos un poco el rect
+    doc.setFontSize(7);
+    doc.setFont("helvetica", "normal");
+    doc.text(niveles[j], bloquesX[j], currentY + 62);
+  }
+
+  // 2. Lógica del Marcador (La "X" o señalizador)
+  // Determinamos en qué bloque cae la puntuación total
+  let indiceBloque = 0;
+  let posicionBloque = 0;
+  
+  if (total <= 4) indiceBloque = 0;
+  else if (total >= 5 && total <= 9) indiceBloque = 1;
+  else if (total >= 10 && total <= 14) indiceBloque = 2;
+  else if (total >= 15) indiceBloque = 3;
+  
+  if (total <= 4) posicionBloque = total;
+  else if (total >= 5 && total <= 9) posicionBloque = total-5;
+  else if (total >= 10 && total <= 14) posicionBloque = total-10;
+  else if (total >= 15) posicionBloque = (total-15)/3;
+
+  // Calculamos el centro del bloque correspondiente
+  const marcadorX = bloquesX[indiceBloque] + (anchoBloque / 4 * posicionBloque);
+  const marcadorY = currentY + 56; // En de la barra de color
+
+  // Dibujamos la señal (Una "X" y el valor encima)
+  doc.setTextColor(0, 0, 0);
+  doc.setFontSize(12);
+  doc.setFont("helvetica", "bold");
+  doc.text("X", marcadorX, marcadorY, { align: "center" });
+  
+  // 3. Añadir la línea del punto de corte específico (España = 12)
+  // El punto de corte 12 cae en el tercer bloque (110 + algo)
+  doc.setDrawColor(200, 0, 0); // Rojo
+  doc.setLineWidth(0.5);
+  const corteX = 110 + ((12 - 10) / (14 - 10) * anchoBloque); 
+  doc.line(corteX, currentY + 45, corteX, currentY + 65);
+  
+
+  // Pie de página
+  const pieY = 285;
+  const url = "https://menteymetrica.com";
+  const textoPie = "Generado por menteymetrica.com | Este informe es una demostración técnica sin valor diagnóstico";
+  
+  doc.setFontSize(8);
+  doc.setTextColor(120);
+  doc.text(textoPie, pageWidth/2, 285, {align: "center"});
+  
+  const textoAncho = doc.getTextWidth(textoPie);
+  const inicioX = (pageWidth - textoAncho) / 2;
+
+  doc.link(inicioX, pieY - 3, textoAncho, 5, { url: url });
+  
+  // Opcional: Añadir una pequeña línea sutil debajo para indicar que es un link
+  doc.setDrawColor(150, 150, 150);
+  doc.line(inicioX, pieY + 1, inicioX + textoAncho, pieY + 1);
+  //
+
+  doc.save("Informe_PHQ9_MenteyMetrica.pdf");
+}
+</script>
+```
+
+<br>
+
+<br>
+
+## Referencias
+
+<div id="refs"></div>
+
+<br>
+
+[Volver](../recursos.html)

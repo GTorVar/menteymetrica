@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Herramienta PHQ-9</title>
+
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="../styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Mente y Métrica</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="../index.html">Inicio</a>
+</li>
+<li>
+  <a href="../about.html">Sobre mí</a>
+</li>
+<li>
+  <a href="../posts.html">Publicaciones</a>
+</li>
+<li>
+  <a href="../recursos.html">Recursos</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://www.linkedin.com/in/german-torres-varas">
+    <span class="fa fa-linkedin"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="mailto:torresgvaras@gmail.com">
+    <span class="fa fa-envelope"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.researchgate.net/profile/German-Torres-Varas?ev=hdr_xprf">
+    <span class="fab fa-researchgate"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://x.com/GermanTorVar">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://github.com/GTorVar">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Herramienta PHQ-9</h1>
+
+</div>
+
+
+<style>
+body {
+  text-align: justify;
+}
+</style>
+<p>Esta herramienta corrige el Cuestionario PHQ9 <span
+class="citation">(Kroenke, Spitzer, and Williams 2001; Spitzer et al.
+1999)</span> en su versión española <span
+class="citation">(González-Blanch et al. 2018)</span> y genera un
+informe en PDF reproducible y con explicación gráfica de resultados.</p>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+
+<div id="app-clinica" style="border: 1px solid #ddd; padding: 25px; border-radius: 10px; background: #fdfdfd; font-family: sans-serif; max-width: 700px; margin: auto;">
+  <h3 style="color: #2c3e50; text-align: center;">Cuestionario de Salud del Paciente (PHQ-9)</h3>
+  <p style="font-style: italic; color: #555; text-align: center;">Durante las 2 últimas semanas, ¿qué tan a menudo le han afectado alguno de los siguientes problemas?</p>
+  
+  <label>Nombre:</label>
+  <input id="nombre" type="text">
+  <label>Evaluador:</label>
+  <input id="evaluador" type="text">
+  <br>
+  <label>Fecha:</label>
+  <input id="fecha" type="date" format="dd/mm/aaaa">
+  
+  <div id="preguntas"> 
+    <label>1. Poco interés o placer para hacer las cosas:</label><br>
+    <select id="q1" class="item-phq">
+      <option value="0">Nunca (0)</option>
+      <option value="1">Varios días (1)</option>
+      <option value="2">Más de la mitad de los días (2)</option>
+      <option value="3">Casi todos los días (3)</option>
+    </select>
+    <br>
+    <label>2. Sentirse triste, deprimido o sin esperanzas:</label><br>
+    <select id="q2" class="item-phq">
+      <option value="0">Nunca (0)</option>
+      <option value="1">Varios días (1)</option>
+      <option value="2">Más de la mitad de los días (2)</option>
+      <option value="3">Casi todos los días (3)</option>
+    </select>
+    <br>
+    <label>3. Dificultad para conciliar o mantener el sueño o dormir demasiado:</label><br>
+    <select id="q3" class="item-phq">
+      <option value="0">Nunca (0)</option>
+      <option value="1">Varios días (1)</option>
+      <option value="2">Más de la mitad de los días (2)</option>
+      <option value="3">Casi todos los días (3)</option>
+    </select>
+    <br>
+    <label>4. Sentirse cansado o tener poca energía:</label><br>
+    <select id="q4" class="item-phq">
+      <option value="0">Nunca (0)</option>
+      <option value="1">Varios días (1)</option>
+      <option value="2">Más de la mitad de los días (2)</option>
+      <option value="3">Casi todos los días (3)</option>
+    </select>
+    <br>
+    <label>5. Poco apetito o comer en exceso:</label><br>
+    <select id="q5" class="item-phq">
+      <option value="0">Nunca (0)</option>
+      <option value="1">Varios días (1)</option>
+      <option value="2">Más de la mitad de los días (2)</option>
+      <option value="3">Casi todos los días (3)</option>
+    </select>
+    <br>
+    <label>6. Sentirse mal sobre sí mismo (o que es un fracaso o que se ha decepcionado a usted o su familia):</label><br>
+    <select id="q6" class="item-phq">
+      <option value="0">Nunca (0)</option>
+      <option value="1">Varios días (1)</option>
+      <option value="2">Más de la mitad de los días (2)</option>
+      <option value="3">Casi todos los días (3)</option>
+    </select>
+    <br>
+    <label>7. Dificultad para concentrarse en actividades como leer o ver la televisión:</label><br>
+    <select id="q7" class="item-phq">
+      <option value="0">Nunca (0)</option>
+      <option value="1">Varios días (1)</option>
+      <option value="2">Más de la mitad de los días (2)</option>
+      <option value="3">Casi todos los días (3)</option>
+    </select>
+    <br>
+    <label>8. Moverse o hablar tan despacio que otras personas pueden haberlo notado. <br> O lo contrario, sentirse tan nervioso e inquieto que ha estado moviéndose más de lo usual:</label><br>
+    <select id="q8" class="item-phq">
+      <option value="0">Nunca (0)</option>
+      <option value="1">Varios días (1)</option>
+      <option value="2">Más de la mitad de los días (2)</option>
+      <option value="3">Casi todos los días (3)</option>
+    </select>
+    <br>
+    <label>9. Pensamientos de que estaría mejor muerto o de lastimarse a usted mismo de alguna manera:</label><br>
+    <select id="q9" class="item-phq">
+      <option value="0">Nunca (0)</option>
+      <option value="1">Varios días (1)</option>
+      <option value="2">Más de la mitad de los días (2)</option>
+      <option value="3">Casi todos los días (3)</option>
+    </select>
+    <br>
+    <br><br>
+    
+    <label>Si usted marcó cualquiera de los problemas, ¿qué tan difícil han afectado estos problemas en hacer su trabajo, encargarse de tareas del hogar, o llevarse bien con otras personas?</label><br>
+    <select id="q10" class="item-phq">
+      <option value="0">Para nada difícil</option>
+      <option value="1">Un poco difícil</option>
+      <option value="2">Muy difícil</option>
+      <option value="3">Extremadamente difícil</option>
+    </select>
+    <br>
+  
+  </div>
+  
+  <button onclick="generarInforme()" style="background-color: #2980b9; color: white; border: none; padding: 15px; border-radius: 5px; width: 100%; cursor: pointer; font-size: 16px; font-weight: bold; margin-top: 15px;">
+    Generar Informe PDF
+  </button>
+</div>
+
+<script>
+function generarInforme() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  const pageWidth = doc.internal.pageSize.getWidth();
+  
+  // Fondo
+  doc.setFillColor(245, 250, 255);
+  doc.rect(0, 0, pageWidth, 297, 'F');
+
+  // Cabecera
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(16);
+  doc.setTextColor(44, 62, 80);
+  doc.text("INFORME RESULTADOS PHQ-9", pageWidth / 2, 20, { align: "center" });
+  
+  //Nombre, evaluador y fecha
+  const nombre = document.getElementById("nombre").value;
+  const evaluador = document.getElementById("evaluador").value;
+  const fecha = document.getElementById("fecha").value;
+  
+  doc.setFontSize(11);
+  doc.text(`Nombre: ${nombre}`, 20, 35);
+  doc.text(`Evaluador: ${evaluador}`, 80, 35);
+  doc.text(`Fecha: ${fecha}`, 140, 35);
+  
+  
+  // Datos y Tabla
+  const labels = ["Interés", "Tristeza", "Sueño", "Energía", "Apetito", "Autoestima", "Concentración", "Psicomotricidad", "Ideación suicida", "Dificultad percibida"];
+  let total = 0;
+  let datosTabla = [];
+  let item9Value = parseInt(document.getElementById('q9').value);
+
+  for(let i=1; i<=10; i++) {
+    let v = parseInt(document.getElementById('q' + i).value);
+    if(i <=9) total += v;
+    datosTabla.push([i, labels[i-1], v]);
+  }
+
+  doc.autoTable({
+    head: [['Item', 'Medida', 'Puntos']],
+    body: datosTabla,
+    startY: 45,
+    styles: { fontSize: 9 },
+    headStyles: { fillColor: [41, 128, 185] }
+  });
+
+  let currentY = doc.lastAutoTable.finalY + 15;
+
+  // Resultado Principal y Corte Español
+  doc.setFontSize(14);
+  doc.text(`Puntuación Total: ${total}`, 20, currentY);
+  
+  let interpretacion = total >= 12 ? "SINTOMATOLOGÍA CLÍNICA (corte en muestras españolas >= 12)" : "Sintomatología subclínica";
+  doc.setFontSize(11);
+  doc.setTextColor(total >= 12 ? 180 : 50, 0, 0);
+  doc.text(`Resultado: ${interpretacion}`, 20, currentY + 7);
+
+  // ALERTA ÍTEM 9 (SEGURIDAD)
+  if (item9Value > 0) {
+    doc.setFillColor(255, 230, 230);
+    doc.setDrawColor(200, 0, 0);
+    doc.rect(15, currentY + 15, pageWidth - 30, 15, 'FD');
+    doc.setTextColor(200, 0, 0);
+    doc.setFont("helvetica", "bold");
+    doc.text("ALERTA: Presencia de pensamientos de autolesión o muerte. Valorar riesgo inmediato.", pageWidth/2, currentY + 24, {align: "center"});
+  }
+
+  // Ayuda Visual: Severidad
+  doc.setTextColor(0);
+  doc.setFont("helvetica", "normal");
+  doc.text("Interpretación Visual de la Severidad:", 20, currentY + 40);
+  
+  const colores = [[220,220,220], [255,240,150], [255,180,100], [240,100,100]];
+  const niveles = ["0-4 Mínima", "5-9 Leve", "10-14 Mod.", "15+ Grave"];
+  const bloquesX = [20, 65, 110, 155]; // Posiciones X de cada bloque
+  const anchoBloque = 40;
+  
+  // 1. Dibujar los bloques de colores
+  for(let j=0; j<4; j++) {
+    doc.setFillColor(colores[j][0], colores[j][1], colores[j][2]);
+    doc.rect(bloquesX[j], currentY + 50, anchoBloque, 8, 'F'); // Subimos un poco el rect
+    doc.setFontSize(7);
+    doc.setFont("helvetica", "normal");
+    doc.text(niveles[j], bloquesX[j], currentY + 62);
+  }
+
+  // 2. Lógica del Marcador (La "X" o señalizador)
+  // Determinamos en qué bloque cae la puntuación total
+  let indiceBloque = 0;
+  let posicionBloque = 0;
+  
+  if (total <= 4) indiceBloque = 0;
+  else if (total >= 5 && total <= 9) indiceBloque = 1;
+  else if (total >= 10 && total <= 14) indiceBloque = 2;
+  else if (total >= 15) indiceBloque = 3;
+  
+  if (total <= 4) posicionBloque = total;
+  else if (total >= 5 && total <= 9) posicionBloque = total-5;
+  else if (total >= 10 && total <= 14) posicionBloque = total-10;
+  else if (total >= 15) posicionBloque = (total-15)/3;
+
+  // Calculamos el centro del bloque correspondiente
+  const marcadorX = bloquesX[indiceBloque] + (anchoBloque / 4 * posicionBloque);
+  const marcadorY = currentY + 56; // En de la barra de color
+
+  // Dibujamos la señal (Una "X" y el valor encima)
+  doc.setTextColor(0, 0, 0);
+  doc.setFontSize(12);
+  doc.setFont("helvetica", "bold");
+  doc.text("X", marcadorX, marcadorY, { align: "center" });
+  
+  // 3. Añadir la línea del punto de corte específico (España = 12)
+  // El punto de corte 12 cae en el tercer bloque (110 + algo)
+  doc.setDrawColor(200, 0, 0); // Rojo
+  doc.setLineWidth(0.5);
+  const corteX = 110 + ((12 - 10) / (14 - 10) * anchoBloque); 
+  doc.line(corteX, currentY + 45, corteX, currentY + 65);
+  
+
+  // Pie de página
+  const pieY = 285;
+  const url = "https://menteymetrica.com";
+  const textoPie = "Generado por menteymetrica.com | Este informe es una demostración técnica sin valor diagnóstico";
+  
+  doc.setFontSize(8);
+  doc.setTextColor(120);
+  doc.text(textoPie, pageWidth/2, 285, {align: "center"});
+  
+  const textoAncho = doc.getTextWidth(textoPie);
+  const inicioX = (pageWidth - textoAncho) / 2;
+
+  doc.link(inicioX, pieY - 3, textoAncho, 5, { url: url });
+  
+  // Opcional: Añadir una pequeña línea sutil debajo para indicar que es un link
+  doc.setDrawColor(150, 150, 150);
+  doc.line(inicioX, pieY + 1, inicioX + textoAncho, pieY + 1);
+  //
+
+  doc.save("Informe_PHQ9_MenteyMetrica.pdf");
+}
+</script>
+<p><br></p>
+<p><br></p>
+<div id="referencias" class="section level2">
+<h2>Referencias</h2>
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
+<div id="ref-gonzalez-blanch2018" class="csl-entry">
+González-Blanch, César, Leonardo Adrián Medrano, Roger Muñoz-Navarro,
+Paloma Ruíz-Rodríguez, Juan Antonio Moriana, Joaquín T. Limonero,
+Florian Schmitz, Antonio Cano-Vindel, and on behalf of the PsicAP
+Research Group. 2018. <span>“Factor Structure and Measurement Invariance
+Across Various Demographic Groups and over Time for the PHQ-9 in Primary
+Care Patients in Spain.”</span> <em>PLOS ONE</em> 13 (2): e0193356. <a
+href="https://doi.org/10.1371/journal.pone.0193356">https://doi.org/10.1371/journal.pone.0193356</a>.
+</div>
+<div id="ref-kroenke2001" class="csl-entry">
+Kroenke, Kurt, Robert L. Spitzer, and Janet B. W. Williams. 2001.
+<span>“The PHQ-9.”</span> <em>Journal of General Internal Medicine</em>
+16 (9): 606–13. <a
+href="https://doi.org/10.1046/j.1525-1497.2001.016009606.x">https://doi.org/10.1046/j.1525-1497.2001.016009606.x</a>.
+</div>
+<div id="ref-spitzer1999" class="csl-entry">
+Spitzer, Robert L., Kurt Kroenke, Janet B. W. Williams, and and the
+Patient Health Questionnaire Primary Care Study Group. 1999.
+<span>“Validation and Utility of a Self-Report Version of PRIME-MDThe
+PHQ Primary Care Study.”</span> <em>JAMA</em> 282 (18): 1737–44. <a
+href="https://doi.org/10.1001/jama.282.18.1737">https://doi.org/10.1001/jama.282.18.1737</a>.
+</div>
+</div>
+<p><br></p>
+<p><a href="../recursos.html">Volver</a></p>
+</div>
+
+<footer>
+    <p>🄯 2025 Germán Torres Varas </p>
+    <p>
+    <a href="https://www.linkedin.com/in/german-torres-varas/"> 
+        <span class="fa fa-linkedin"></span>
+    </a>    ·    
+    <a href="mailto:torresgvaras@gmail.com">
+        <span class="fa fa-envelope"></span>
+    </a>    ·   
+    <a href="https://www.researchgate.net/profile/German-Torres-Varas?ev=hdr_xprf">
+        <span class="fab fa-researchgate"></span>
+    </a>    ·   
+    <a href="https://x.com/GermanTorVar">
+        <span class="fa fa-twitter"></span>
+    </a>    ·   
+    <a href="https://github.com/GTorVar">
+        <span class="fa fa-github"></span>
+    </a>
+    </p>
+</footer>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
