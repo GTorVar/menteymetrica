@@ -127,15 +127,16 @@ Esta herramienta corrige el Cuestionario PHQ9 [@kroenke2001; @spitzer1999] en su
 
 <div id="app-clinica" style="border: 1px solid #ddd; padding: 25px; border-radius: 10px; background: #fdfdfd; font-family: sans-serif; max-width: 700px; margin: auto;">
   <h3 style="color: #2c3e50; text-align: center;">Cuestionario de Salud del Paciente (PHQ-9)</h3>
-  <p style="font-style: italic; color: #555; text-align: center;">Durante las 2 últimas semanas, ¿qué tan a menudo le han afectado alguno de los siguientes problemas?</p>
   
-  <label>Nombre:</label>
-  <input id="nombre" type="text">
-  <label>Evaluador:</label>
-  <input id="evaluador" type="text">
+  <label style="width: 10%;">Nombre:</label>
+  <input id="nombre" type="text" style="width: 30%;">
+  <label style="width: 12%;">Evaluador:</label>
+  <input id="evaluador" type="text" style="width: 30%;">
   <br>
-  <label>Fecha:</label>
-  <input id="fecha" type="date" format="dd/mm/aaaa">
+  <label style="width: 10%;">Fecha:</label>
+  <input id="fecha" type="date" format="dd/mm/aaaa" style="width: 30%;">
+  
+  <p style="font-style: italic; color: #555; text-align: center;">Durante las 2 últimas semanas, ¿qué tan a menudo le han afectado alguno de los siguientes problemas?</p>
   
   <div id="preguntas"> 
     <label>1. Poco interés o placer para hacer las cosas:</label><br>

@@ -1,6 +1,6 @@
 output_dir: "../docs/posts"
 navbar:
-  title: "Mente y Métrica"
+  title: "<a class='navbar-brand' href='../index.html'>Mente y Métrica</a>"
   left:
     - text: "Inicio"
       href: ../index.html
