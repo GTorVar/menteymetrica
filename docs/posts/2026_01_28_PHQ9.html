@@ -593,6 +593,13 @@ function generarInforme() {
 
   doc.save("Informe_PHQ9_MenteyMetrica.pdf");
 }
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js');
+  });
+}
+
 </script>
 <p><br></p>
 <p><br></p>
