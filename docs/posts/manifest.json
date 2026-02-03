@@ -1,9 +1,0 @@
-{
-  "name": "Mente y Métrica - Evaluador PHQ-9",
-  "short_name": "PHQ9",
-  "description": "Herramienta profesional de cribado de depresión",
-  "start_url": "index.html",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#2c3e50",
-}
