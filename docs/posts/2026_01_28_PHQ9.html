@@ -331,13 +331,13 @@ informe en PDF reproducible y con explicación gráfica de resultados.</p>
   <h3 style="color: #2c3e50; text-align: center;">Cuestionario de Salud del Paciente (PHQ-9)</h3>
   
   <label style="width: calc(10% + 10px);">Nombre:</label>
-  <input id="nombre" type="text">
+  <input id="nombre" type="text" style="width: 28%">
   <label style="width: calc(12% + 10px);">Evaluador:</label>
-  <input id="evaluador" type="text">
+  <input id="evaluador" type="text" style="width: 28%">
   <br>
   <label style="width: calc(10% + 10px);">Fecha:</label>
-  <input id="fecha" type="date" format="dd/mm/aaaa">
-  
+  <input id="fecha" type="date" format="dd/mm/aaaa" style="width: 28%">
+  <br>
   <p style="font-style: italic; color: #555; text-align: center;">Durante las 2 últimas semanas, ¿qué tan a menudo le han afectado alguno de los siguientes problemas?</p>
   
   <div id="preguntas"> 
@@ -450,12 +450,31 @@ function generarInforme() {
   //Nombre, evaluador y fecha
   const nombre = document.getElementById("nombre").value;
   const evaluador = document.getElementById("evaluador").value;
-  const fecha = document.getElementById("fecha").value;
+  
+  const fechaString = document.getElementById("fecha").value;
+  const fecha = new Date(fechaString)
+  
+  const dd = fecha.getDate().toString().padStart(2, '0');
+  const mm = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Enero es 0
+  const yyyy = fecha.getFullYear(); 
   
   doc.setFontSize(11);
-  doc.text(`Nombre: ${nombre}`, 20, 35);
-  doc.text(`Evaluador: ${evaluador}`, 80, 35);
-  doc.text(`Fecha: ${fecha}`, 140, 35);
+  doc.setFont("helvetica", "bold");
+  doc.text(`Nombre:`, 20, 35);
+  doc.setFont("helvetica", "normal");
+  doc.text(`${nombre}`, 37, 35);
+  
+  doc.setFont("helvetica", "bold");
+  doc.text(`Evaluador:`, 20, 40);
+  doc.setFont("helvetica", "normal");
+  doc.text(`${evaluador}`, 41, 40);
+  
+  doc.setFont("helvetica", "bold");
+  doc.text(`Fecha:`, 160, 35);
+  doc.setFont("helvetica", "normal");
+  doc.text(`${dd}/${mm}/${yyyy}`, 173, 35);
+  
+  doc.setFont("helvetica", "bold");
   
   
   // Datos y Tabla
