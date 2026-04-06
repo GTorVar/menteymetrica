@@ -1,0 +1,141 @@
+---
+title: "La paradoja de la escala: del sesgo por 'n' pequeño a la tiranía del Big Data"
+
+output: html_document
+references:
+- id: yaddanapudi2016
+  accessed:
+    - year: 2026
+      month: 4
+      day: 6
+  author:
+    - family: Yaddanapudi
+      given: Lakshmi Narayana
+  citation-key: yaddanapudi2016
+  container-title: Journal of Anaesthesiology, Clinical Pharmacology
+  container-title-short: J Anaesthesiol Clin Pharmacol
+  DOI: 10.4103/0970-9185.194772
+  ISSN: 0970-9185
+  issue: '4'
+  issued:
+    - year: 2016
+  page: 421–423
+  PMCID: PMC5187603
+  PMID: '28096569'
+  source: PubMed Central
+  title: The American Statistical Association statement on P-values explained
+  type: article-journal
+  URL: https://pmc.ncbi.nlm.nih.gov/articles/PMC5187603/
+  volume: '32'
+---
+
+<style>
+body {
+  text-align: justify;
+}
+</style>
+
+```{r setup, echo=F, warning=F, message=F}
+knitr::opts_chunk$set(echo = F, warning = F, message = F)
+
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(patchwork)
+
+# Configuración de estilo global para tu web
+theme_set(theme_classic(base_size = 14))
+```
+
+
+La validez externa no es solo la capacidad de "generalizar", también es la capacidad para que los hallazgos en investigación sobrevivan al contacto con la realidad. Tradicionalmente en psicología existía cierta confianza en las muestras de conveniencia, derivado en parte de las necesidades económicas en la investigación (las muestras compuestas por estudiantes universitarios desde luego son las más sencillas y baratas), lo que daba resultados, en el mejor de los casos, idiosincráticos. En la otra vertiente, la de estudios mejor financiados, también existía cierta fe cuando las muestras eran mayores de 30-50 participantes, dado que se suelen cumplir los requisitos de las pruebas estadísticas más usadas.
+
+## El "error de los pocos"
+
+En ciencias de la salud el trabajo con muestras pequeñas es, en ocasiones, inevitable. Por cercanía clínica, por determinante económico, por ausencia de pacientes con ciertas condiciones en un área de salud determinada o por falta de voluntarios (según el objeto de investigación), los estudios se abocan a una metodología peligrosa. Las principales repercusiones de tener grupos pequeños son:
+
+* **Poder estadístico ($1-\beta$)**: solo los efectos grandes son detectables. Esto lleva al famoso *sesgo de publicación*, dado que se publica lo "significativo", que suele ser una sobreestimación del efecto real
+* **Inestabilidad**: un solo dato extremo en una muestra de 15 personas puede crear una correlación alta de la nada.
+  
+```{r npequeño}
+set.seed(123)
+# Simulación de una muestra pequeña donde un solo outlier cambia todo
+n_small <- 15
+df_small <- data.frame(
+  x = rnorm(n_small),
+  y = rnorm(n_small)
+)
+# Añadimos un outlier estratégico
+df_small_outlier <- rbind(df_small, data.frame(x = 4, y = 4))
+
+ggplot(df_small_outlier, aes(x, y)) +
+  geom_point(color = "steelblue", size = 3) +
+  geom_smooth(method = "lm", se = FALSE, color = "firebrick", linetype = "dashed") +
+  annotate("text", x = 3, y = 4.5, label = "Outlier influyente", color = "firebrick") +
+  labs(x = "Variable X", y = "Variable Y")
+```
+
+## La trampa del *Big Data*: el p-valor como ruido
+
+Hoy en día este es un punto clave. En la era de los grandes volúmenes de datos y el *machine learning* el valor p tradicional (el marcado arbitrariamente como significativo con el famoso $p<.05$) pierde el sentido original. En este contexto el problema principal es la **sensibilidad extrema**. Con muestras grandes ($N>1000$) el error estándar tiende a cero (recordando su fórmula, $SE = \frac{\sigma}{\sqrt n}$, un aumento del denominador con la misma desviación típica produce un error estándar menor). Esto viene a decir que cualquier diferencia mínima, por pequeña o irrelevante que sea a nivel práctico, será "estadísticamente significativa". En el siguiente gráfico se representa el valor p de una correlación $r_{xy}=0.05$ (una variable X aleatoria y una variable $Y=0.05x + \epsilon$, $\epsilon \sim N(0, 0.5)$) según el tamaño de la muestra; se ve claramente a partir de 1000 "participantes" los valores p son menores a .05 pese a que la correlación no ha variado en ningún punto, simplemente el tamaño de la muestra ha hecho que la prueba estadística tenga la suficiente potencia para detectar una correlación mínima.
+
+```{r sensibilidad}
+set.seed(1)
+n_seq <- seq(50, 2000, by = 25)
+p_values <- sapply(n_seq, function(n) {
+  x <- rnorm(n)
+  y <- 0.05 * x + rnorm(n, sd = 0.5) 
+  cor.test(x, y)$p.value
+})
+
+df_p <- data.frame(n = n_seq, p = p_values)
+
+ggplot(df_p, aes(x = n, y = p)) +
+  geom_line(color = "darkgreen", size = 1) +
+  geom_hline(yintercept = 0.05, linetype = "dotted", color = "red") +
+  scale_y_log10(breaks = c(0.001, 0.01, 0.05, 0.1, 1)) +
+  labs(x = "Tamaño de la muestra (N)", y = "p-valor (escala Log)")
+```
+
+En este punto es necesario distinguir de manera precisa la significancia estadística del tamaño del efecto: mientras que la significancia es arbitraria (marcamos el valor $\alpha$ donde suponemos que el error del falso positivo es aceptable) y tiene una serie de problemas tratados ampliamente por la *American Statistical Association*, por ejemplo en @yaddanapudi2016, el tamaño del efecto es una medida de la fuerza de un fenómeno, como el cambio surgido durante un experimento, emanado de los datos (es un estadístico descriptivo en términos estrictos). Por ejemplo, la correlación puede ser, bajo ciertas condiciones, un tamaño de efecto que, en el caso del ejemplo anterior, era mínimo.
+
+## El sobreajuste
+
+Otro *leitmotiv* del análisis de datos modernos. En el aprendizaje automático el exceso de parámetros en relación con la muestra o el entrenamiento excesivo con un conjunto de datos, aunque tenga poco sesgo, puede destruir la validez externa. El modelo "memoriza" la relación entre los datos existentes, pero no "aprende" un patrón general de cómo podrían relacionarse las variables en un entorno ecológico. Puede darse (y se da) el caso de modelos que explican casi el $100\%$ de la varianza pero fallan estrepitosamente en la predicción de nuevos casos. En entornos sanitarios, además, hay que tener en cuenta que modelos que trabajan con datos biomédicos que incorporan transcripciones o valoraciones clínicas pueden convertirse en una manera cara de tirar el dinero, dado que no son datos tipificados que una herramienta estadística pueda aprovechar. 
+
+```{r sobreajuste}
+set.seed(42)
+complexity <- 1:10
+train_error <- c(0.5, 0.4, 0.35, 0.32, 0.3, 0.28, 0.27, 0.26, 0.25, 0.24)
+test_error <- c(0.55, 0.45, 0.4, 0.38, 0.42, 0.5, 0.6, 0.75, 0.9, 1.1)
+
+df_fit <- data.frame(Complejidad = complexity, Entrenamiento = train_error, Test = test_error) %>%
+  pivot_longer(cols = 2:3, names_to = "Dataset", values_to = "Error")
+
+ggplot(df_fit, aes(x = Complejidad, y = Error, color = Dataset)) +
+  geom_line(size = 1.2) +
+  geom_vline(xintercept = 4, linetype = "dashed", color = "gray40") +
+  annotate("text", x = 4.5, y = 1, label = "Punto óptimo de\ngeneralización", hjust = 0) +
+  labs(x = "Complejidad del Modelo / Número de Parámetros", y = "Error Predictivo") +
+  scale_color_manual(values = c("Entrenamiento" = "blue", "Test" = "orange"))
+```
+
+En el gráfico se representa, con datos simulados, el concepto de "punto óptimo" para que un modelo sea generalizable. A partir de ese punto existiría un sobreajuste que provocaría el aumento del error con datos con los que no hubiera sido entrenado.
+
+## Posibles soluciones
+
+Como siempre ha ocurrido, cada problema requiere de un estudio pormenorizado de las fortalezas y debilidades para proponer la solución más adecuada. Desde la metodología se suelen proponer diferentes alternativas para trabajar con estos problemas:
+
+* **Enfoque en el Tamaño del efecto**($\eta^2,\ d\ de\ Cohen,\ etc$). No se trata de decir si algo es significativo, sino de si algo importa
+* **Validación cruzada**. Esencial en aprendizaje automático, pero aplicable a los modelos tradicionales, no existe la validez externa sin poner a prueba el modelo con datos que no conoce
+* **Análisis Bayesiano**. Los factores de Bayes pueden evaluar la evidencia a favor de la hipótesis nula, algo que los valores p no permiten
+* **Equivalenciay pruebas TOST**. Busca probar que dos grupos son iguales en lugar de buscar diferencias
+
+
+## Referencias
+
+<div id="refs"></div>
+
+<br>
+
+[Volver](../posts.html)

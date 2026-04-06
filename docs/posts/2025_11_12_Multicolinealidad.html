@@ -53,8 +53,9 @@
   }
 </style>
 <style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -470,7 +471,7 @@ Todo el código se moverá en R.</p>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>datos <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(<span class="at">X1 =</span> x1, <span class="at">X2 =</span> x2, <span class="at">X3 =</span> x3, <span class="at">Y =</span> y)</span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">scatterplotMatrix</span>(datos, <span class="at">smooth =</span> F, <span class="at">regLine =</span> T)</span></code></pre></div>
-<p><img src="2025_11_12_Multicolinealidad_files/figure-html/datos-1.png" width="672" /></p>
+<p><img src="2025_11_12_Multicolinealidad_files/figure-html/datos-1.png" alt="" width="672" /></p>
 <p>Como se ve en las gráficas, es fácil ver cómo X3 y X1 están
 relacionadas de una manera lineal muy concreta. Este indicador ya es en
 sí mismo una alerta para la colinealidad. Como es lógico, la correlación
@@ -523,7 +524,7 @@ Curiosamente sabemos que la variable Y sigue una ecuación concreta en la
 que participan las 3 variables de cierta manera y es el término de error
 el que introduce la distorsión que termina por modificar la ecuación del
 modelo.</p>
-<p><img src="2025_11_12_Multicolinealidad_files/figure-html/unnamed-chunk-5-1.png" width="672" /><img src="2025_11_12_Multicolinealidad_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+<p><img src="2025_11_12_Multicolinealidad_files/figure-html/unnamed-chunk-5-1.png" alt="" width="672" /><img src="2025_11_12_Multicolinealidad_files/figure-html/unnamed-chunk-5-2.png" alt="" width="672" /></p>
 <p>En los ajustes de las regresiones se ve el impacto que tiene sacar X3
 del modelo matemático sobre el ajuste de X1, mientras que X2 mantiene
 prácticamente sus valores. Aquí reside uno de los principales problemas
@@ -559,7 +560,7 @@ dispersión.</p>
 ## X3  0.93 -0.026  1.000 0.646
 ## X4  0.68  0.084  0.646 1.000</code></pre>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">scatterplotMatrix</span>(datos, <span class="at">smooth =</span> F, <span class="at">regLine =</span> T)</span></code></pre></div>
-<p><img src="2025_11_12_Multicolinealidad_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="2025_11_12_Multicolinealidad_files/figure-html/unnamed-chunk-7-1.png" alt="" width="672" /></p>
 <p>En la gráfica, sin embargo, se observa cómo esa correlación
 exponencial tiene un impacto importante en el modelo. Aunque el
 tratamiento de variables exponenciales no es el objetivo de esta
@@ -675,7 +676,7 @@ href="http://scielo.sld.cu/scielo.php?script=sci_abstract&amp;pid=S2071-00542012
 </div>
 
 <footer>
-    <p>🄯 2025 Germán Torres Varas </p>
+    <p>🄯 2026 Germán Torres Varas </p>
     <p>
     <a href="https://www.linkedin.com/in/german-torres-varas/"> 
         <span class="fa fa-linkedin"></span>
