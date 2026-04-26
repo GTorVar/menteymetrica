@@ -47,28 +47,6 @@
 
 
 
-<style type="text/css">
-/* for pandoc --citeproc since 2.11 */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="../styles.css" type="text/css" />
 
@@ -338,88 +316,98 @@ Teorema del Límite Central (TLC). El TLC postula que cuando sumas muchas
 variables independientes y de varianza finita, la suma resultante tiende
 a la normalidad, sin importar la distribución original de esas
 variables.</p>
-<p>En psicología, asumimos que un constructo como la “Inteligencia” es
-el resultado de miles de pequeños factores (genéticos, ambientales,
-nutricionales) sumándose entre sí. Por eso, esperamos que las
-puntuaciones se agrupen en el centro. Es cómoda, es elegante y, sobre
-todo, permite usar la estadística paramétrica (t-tests, ANOVA) que tanto
-nos gusta.</p>
+<p>En psicología, se asume que algunos constructos, como la
+“Inteligencia”, son el resultado de miles de pequeños factores
+(genéticos, ambientales, nutricionales, etc.) sumándose entre sí. Por
+eso, se espera que las puntuaciones se agrupen en el centro. Es cómoda,
+es elegante y, sobre todo, permite usar la estadística paramétrica
+(t-tests, ANOVA) que tanto gusta y tan fácil resulta.</p>
 </div>
 <div id="el-límite-de-la-campana-cuando-el-mundo-se-vuelve-salvaje"
 class="section level2">
 <h2>El límite de la campana: Cuando el mundo se vuelve “salvaje”</h2>
-<p>El problema surge cuando los factores no se suman, sino que se
-multiplican o interactúan de forma compleja. Gauss funciona bien para
-medir estaturas, donde es físicamente imposible que alguien mida 10
-metros. Pero falla estrepitosamente en fenómenos donde un solo evento o
-individuo puede pesar más que toda la población junta.</p>
-<p>Aquí es donde los límites de la normalidad se hacen evidentes: *
-Ignora los extremos: En una normal, un evento a 5 desviaciones típicas
-es prácticamente imposible * Asume independencia: Asume que lo que le
-pasa a un sujeto no afecta al resto</p>
+<p>El problema surge cuando los factores no se suman sino que se
+multiplican o interactúan de forma compleja. La distribución normal
+funciona bien para medir estaturas, donde es físicamente imposible que
+alguien mida 10 metros, pero falla estrepitosamente en fenómenos donde
+un solo evento o individuo puede pesar más que el resto de la población
+junta.</p>
+<p>Aquí es donde los límites de la normalidad se hacen evidentes:</p>
+<ul>
+<li><p>Ignora los extremos: en una distribución normal, un evento a 5
+desviaciones típicas es prácticamente imposible</p></li>
+<li><p>Asume independencia: supone que lo que le pasa a un sujeto no
+afecta al resto</p></li>
+</ul>
 </div>
 <div id="la-ley-de-potencia-la-firma-de-la-complejidad"
 class="section level2">
-<h2>La Ley de Potencia: La firma de la complejidad</h2>
+<h2>La Ley de Potencia: la firma de la complejidad</h2>
 <p>Frente a la campana de Gauss aparece la Ley de Potencia. Si la normal
-es la distribución de la “mediocridad” (en el sentido estadístico de
-estar en la media), la ley de potencia es la distribución de los
-extremos.</p>
-<p>Se define matemáticamente como <span class="math inline">\(P(x)
-\propto x^{-\alpha}\)</span>. En este mundo, no hay un “valor típico”.
-Muchos fenómenos naturales y sociales siguen este patrón: * Terremotos:
-Hay miles de microseísmos diarios, pero la energía de un solo terremoto
-de escala 9.0 puede superar a todos los demás combinados * Víctimas de
-guerra: La mayoría de los conflictos tienen pocas víctimas, pero unos
-pocos (como las Guerras Mundiales) concentran la gran mayoría de la
-mortalidad histórica * Riqueza: El famoso principio de Pareto (el
-80/20).</p>
+es la distribución de la media, la ley de potencia es la distribución de
+los extremos. Se define matemáticamente como <span
+class="math inline">\(P(x) \propto x^{-\alpha}\)</span>. En este mundo,
+no hay un “valor típico”, sino que existen interacciones complejas entre
+pequeños factores que dan como resultado distribuciones “alargadas”.
+Muchos fenómenos naturales y sociales siguen este patrón:</p>
+<ul>
+<li><p>Terremotos: hay miles de microseísmos diarios, pero la energía de
+un solo terremoto de escala 9.0 puede superar a todos los demás
+combinados</p></li>
+<li><p>Víctimas de guerra: la mayoría de los conflictos tienen pocas
+víctimas, pero unos pocos (como las Guerras Mundiales) concentran la
+gran mayoría de la mortalidad histórica</p></li>
+<li><p>Riqueza: el famoso principio de Pareto (el 80/20)</p></li>
+</ul>
+<p><img src="2026_04_07_Normalidad_files/figure-html/log-1.png" alt="" width="672" /></p>
 <p>En estos casos, la media no sirve para nada. Si Bill Gates entra en
 un bar, la “riqueza media” de los clientes sube a mil millones de
 dólares, pero esa cifra no describe a nadie en el bar.</p>
 </div>
 <div id="el-puente-hacia-la-evaluación-la-distribución-log-normal"
 class="section level2">
-<h2>El puente hacia la evaluación: La Distribución Log-Normal¿</h2>
-<p>Cómo conectamos esto con un test psicológico? A través de la
-distribución Log-Normal. Esta ocurre cuando el logaritmo de una variable
-sigue una distribución normal. Es el resultado de procesos
-multiplicativos.</p>
+<h2>El puente hacia la evaluación: la distribución Log-Normal</h2>
+<p>¿Cómo se conecta esto con un test psicológico? A través de la
+distribución Log-Normal, cuando el logaritmo de una variable sigue una
+distribución normal. Es el resultado de procesos multiplicativos y se
+adapta a los términos más comprensibles de la estadística clásica,
+siempre y cuando se tenga en cuenta que lo representado es el logaritmo
+de los valores y no los valores en sí.</p>
+<p><img src="2026_04_07_Normalidad_files/figure-html/lognormal-1.png" alt="" width="672" /></p>
 <p>En la evaluación conductual (como tiempos de reacción o escalas de
 síntomas), los datos suelen presentar una asimetría positiva clara:
-mucha gente con puntuaciones bajas y unos pocos con puntuaciones
-altísimas.</p>
-<p><img src="2026_04_07_Normalidad_files/figure-html/lognormal-1.png" alt="" width="672" /></p>
-</div>
-<div id="por-qué-esto-importa-en-tu-investigación"
-class="section level2">
-<h2>¿Por qué esto importa en tu investigación?</h2>
-<p>Si estás evaluando la eficacia de un tratamiento o la distribución de
-una patología en una población y asumes normalidad cuando hay una ley de
-potencia o log-normalidad: * Diagnosticarás erróneamente: Al usar el
-punto de corte basado en desviaciones típicas (<span
-class="math inline">\(\mu \pm 2\sigma\)</span>), estarás sobrestimando o
-subestimando la rareza de un caso clínico. * Perderás poder predictivo:
-Los modelos lineales (regresiones) se verán sesgados por la cola larga,
-intentando ajustar la línea a valores extremos que no son errores, sino
-parte esencial de la distribución. * Validez de Contenido: Si un test de
-depresión muestra una distribución de ley de potencia, quizás es que la
-depresión no es un rasgo continuo en la población, sino un sistema
-complejo donde los síntomas se retroalimentan (efecto bola de
-nieve).</p>
-<p>Como investigadores, debemos ser valientes. Si tus datos muestran una
-cola larga, no intentes “normalizarlos” a la fuerza. Esa asimetría es la
-huella digital de la complejidad del comportamiento humano. Menos Gauss
-y más Pareto para una psicología que quiera entender de verdad los casos
-extremos.</p>
-</div>
-<div id="referencias" class="section level2">
-<h2>Referencias</h2>
-<div id="refs">
-
-</div>
-<p><br></p>
+mucha gente con puntuaciones bajas y unos pocos con puntuaciones altas.
+El analizar los datos y entender su distribución permite adaptar las
+técnicas y escalas de medida de manera adecuada.</p>
+<div id="por-qué-esto-importa-en-investigación" class="section level3">
+<h3>¿Por qué esto importa en investigación?</h3>
+<p>Si se evalúa la eficacia de un tratamiento o la distribución de una
+patología en una población y se asume normalidad cuando hay una ley de
+potencia o log-normalidad:</p>
+<ul>
+<li><p>Se diagnostica erróneamente, al usar el punto de corte basado en
+desviaciones típicas (<span class="math inline">\(\mu \pm
+2\sigma\)</span>). Se puede estar sobrestimando o subestimando la rareza
+de cada caso clínico</p></li>
+<li><p>Se pierde poder predictivo. Los modelos lineales (regresiones) se
+verán sesgados por la cola larga, intentando ajustar la línea a valores
+extremos que no son errores, sino parte esencial de la distribución.
+Esto puede dar lugar a correlaciones ilusorias o a efectos ficticios y,
+por la otra parte, se pueden eludir fenómenos escasos de gran interés
+clínico</p></li>
+<li><p>Validez de Contenido. Si un test de depresión muestra una
+distribución de ley de potencia, quizás es que la depresión no es un
+rasgo continuo en la población, sino un sistema complejo donde los
+síntomas se retroalimentan (efecto bola de nieve) o interaccionan de
+formas que la distribución normal no explica</p></li>
+</ul>
+<p>Como investigadores, debemos ser valientes. Si los datos muestran una
+cola larga, no se debe intentar “normalizarlos” a la fuerza. Esa
+asimetría es la huella digital de la complejidad del comportamiento
+humano. Una mirada más abierta respecto a las distribuciones puede dar
+lugar a una psicología que entienda de verdad los casos extremos.</p>
 <p><a href="../posts.html">Volver</a></p>
+</div>
 </div>
 
 <footer>
