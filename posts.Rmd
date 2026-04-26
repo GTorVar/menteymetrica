@@ -3,6 +3,8 @@ title: "Publicaciones"
 output: html_document
 ---
 
+- [La ‘tiranía’ de Gauss: por qué la normalidad es una alternativa y no una condición en psicología](posts/2026_04_07_Normalidad.html)
+
 - [La paradoja de la escala: del sesgo por 'n' pequeño a la tiranía del Big Data](posts/2026_04_06_Validez.html)
 
 - [Reseña metodológica: Mild Dehydration Affects Mood in Healthy  Young Women (Armstrong et al., 2012)](posts/2026_01_15_ResenaArmstrong.html)
