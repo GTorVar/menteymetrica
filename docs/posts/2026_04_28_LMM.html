@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Modelos Mixtos (LMM): el fin de los promedios y la agregación en Educación</title>
+
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="../styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><a class='navbar-brand' href='../index.html'>Mente y Métrica</a></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="../index.html">Inicio</a>
+</li>
+<li>
+  <a href="../about.html">Sobre mí</a>
+</li>
+<li>
+  <a href="../posts.html">Publicaciones</a>
+</li>
+<li>
+  <a href="../recursos.html">Recursos</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://www.linkedin.com/in/german-torres-varas">
+    <span class="fa fa-linkedin"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="mailto:torresgvaras@gmail.com">
+    <span class="fa fa-envelope"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.researchgate.net/profile/German-Torres-Varas?ev=hdr_xprf">
+    <span class="fab fa-researchgate"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://x.com/GermanTorVar">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://github.com/GTorVar">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Modelos Mixtos (LMM): el fin de los
+promedios y la agregación en Educación</h1>
+
+</div>
+
+
+<style>
+body {
+  text-align: justify;
+}
+</style>
+<p>En el análisis de datos educativos, aparece recurrentemente un error
+sistemático casi por inercia: tratar a cada alumno como si fuera una
+unidad aislada en el vacío. Se realiza una regresión lineal, se obtiene
+un p-valor y se dictamina si una intervención funciona. Pero hay un
+problema invisible que invalida miles de investigaciones cada año:
+<strong>el anidamiento</strong>.</p>
+<p>En este artículo, se desglosa por qué los promedios suelen mentir y
+cómo los <strong>Modelos Lineales Mixtos (LMM)</strong> permiten
+rescatar la individualidad dentro del grupo, siguiendo las nociones del
+libro Análisis de datos en ciencias sociales y de la salud III <span
+class="citation">(Pardo Merino and Ruiz Díaz 2012)</span>.</p>
+<div id="el-pecado-original-de-la-estadística-clásica-la-independencia"
+class="section level2">
+<h2>1. El pecado original de la estadística clásica: la
+independencia</h2>
+<p>Cualquier curso de estadística básica comienza con los supuestos del
+Modelo Lineal General (MLG). Uno de los más sagrados es la
+<strong>independencia de los errores</strong>. Este supuesto dicta que
+el residuo de un sujeto no debe darnos información sobre el residuo de
+otro. Aunque teóricamente es conveniente, en el mundo real no siempre se
+cumple, especialmente en los casos como la investigación educativa,
+donde los alumnos de una clase no pueden considerarse como sujetos
+independientes desde el punto de vista de la estadística. Esto sucede
+porque los alumnos están <strong>anidados</strong>:</p>
+<ul>
+<li><p>Los alumnos están dentro de <strong>aulas</strong></p></li>
+<li><p>Las aulas están dentro de <strong>colegios</strong></p></li>
+<li><p>Los colegios están dentro de <strong>distritos</strong></p></li>
+</ul>
+<p>Si dos alumnos comparten el mismo profesor, el mismo clima de aula y
+el mismo nivel socioeconómico del barrio, sus puntuaciones pueden estar
+correlacionadas en algún sentido. Ignorar esto no es solo un descuido,
+sino contradecir la esencia misma de la probabilidad, lo que infla
+artificialmente el tamaño de la muestra y produce “falsos positivos” (el
+famoso Error Tipo I) masivos.</p>
+</div>
+<div id="el-problema-de-los-enfoques-tradicionales"
+class="section level2">
+<h2>2. El problema de los enfoques tradicionales</h2>
+<p>Históricamente se han intentado solucionar esto de dos formas,
+ninguna de las cuales es óptima:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Agregación:</strong> promediar las notas de toda la clase
+y analizar solo los promedios de las aulas. <em>Resultado:</em> se
+pierde toda la variabilidad individual (la gran mayoría de los
+datos)</p></li>
+<li><p><strong>Desagregación</strong> (<em>complete pooling</em>):
+tratar a 300 alumnos de 10 colegios como si fueran 300 alumnos
+independientes. <em>Resultado:</em> se subestima el error estándar y se
+corre el riesgo de creer que efectos insignificantes son
+“reales”</p></li>
+</ol>
+<p>Aquí es donde entran los <strong>Modelos Mixtos</strong>. Estos
+modelos permiten que existan “efectos fijos” (la tendencia general que
+buscamos) y “efectos aleatorios” (la variabilidad propia de cada
+grupo).</p>
+</div>
+<div id="demostración-técnica-en-r-el-modelo-de-intercepto-aleatorio"
+class="section level2">
+<h2>3. Demostración técnica en R: El Modelo de Intercepto Aleatorio</h2>
+<p>Se simula acontinuación un escenario: se quiere ver cómo afectan las
+horas de estudio (variable predictora) al rendimiento académico en 10
+escuelas diferentes.</p>
+<div id="paso-1-carga-de-librerías-y-simulación" class="section level3">
+<h3>Paso 1: Carga de librerías y simulación</h3>
+<p>En el fragmento de código a continuación se simula un conjunto de
+datos donde se analiza el rendimiento de 20 alumnos de 10 escuelas (200
+alumnos en total). Se quiere investigar la relación entre las horas de
+estudio y el rendimiento y se “obliga” a que éstas tengan un efecto “de
+media” en cada alumno; por otra parte se añade un ruido sistemático para
+cada escuela y por último un ruido por cada alumno, para que los datos
+no se apiñen en el mismo entorno. Por razones de visualización, se fija
+que en una escuela estudiar más no tenga efectos en el rendimiento.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>) <span class="co"># Replicabilidad</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co"># 10 escuelas con 20 alumnos cada una</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>n_escuelas <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>n_alumnos <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>total_n <span class="ot">&lt;-</span> n_escuelas <span class="sc">*</span> n_alumnos</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>df_edu <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  <span class="at">escuela =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>n_escuelas, <span class="at">each =</span> n_alumnos)),</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  <span class="at">horas_estudio =</span> <span class="fu">runif</span>(total_n, <span class="dv">1</span>, <span class="dv">10</span>),</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  <span class="at">rendimiento =</span> <span class="fu">rep</span>(<span class="dv">0</span>, total_n)</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>)</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="co"># Efecto de escuela (intercepto aleatorio)</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="co"># Algunas escuelas tienen más recursos que otras &quot;de base&quot;</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>efectos_escuela <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n_escuelas, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="fu">names</span>(efectos_escuela) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n_escuelas</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>df_edu[<span class="dv">1</span><span class="sc">:</span><span class="dv">180</span>,]<span class="sc">$</span>rendimiento <span class="ot">&lt;-</span> <span class="dv">30</span> <span class="sc">+</span> </span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>  (<span class="fl">2.5</span> <span class="sc">*</span> df_edu[<span class="dv">1</span><span class="sc">:</span><span class="dv">180</span>,]<span class="sc">$</span>horas_estudio) <span class="sc">+</span>    <span class="co"># Efecto fijo (estudiar ayuda)</span></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>  efectos_escuela[df_edu[<span class="dv">1</span><span class="sc">:</span><span class="dv">180</span>,]<span class="sc">$</span>escuela] <span class="sc">+</span> <span class="co"># Variabilidad por escuela</span></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>  <span class="fu">rnorm</span>(total_n<span class="dv">-20</span>, <span class="at">sd =</span> <span class="dv">2</span>)                 <span class="co"># Ruido individual</span></span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>df_edu[<span class="dv">181</span><span class="sc">:</span><span class="dv">200</span>,]<span class="sc">$</span>rendimiento <span class="ot">&lt;-</span> <span class="dv">30</span> <span class="sc">+</span> </span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>  (<span class="dv">0</span> <span class="sc">*</span> df_edu[<span class="dv">181</span><span class="sc">:</span><span class="dv">200</span>,]<span class="sc">$</span>horas_estudio) <span class="sc">+</span>       <span class="co"># Efecto fijo (estudiar no tiene efecto)</span></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>  efectos_escuela[df_edu[<span class="dv">181</span><span class="sc">:</span><span class="dv">200</span>,]<span class="sc">$</span>escuela] <span class="sc">+</span>  <span class="co"># Variabilidad por escuela</span></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">sd =</span> <span class="dv">2</span>)                            <span class="co"># Ruido individual</span></span></code></pre></div>
+</div>
+<div id="paso-2-comparación-de-modelos" class="section level3">
+<h3>Paso 2: Comparación de modelos</h3>
+<p>Tras ello, se realiza una regresión lineal simple (que ignora el
+efecto de las escuelas) frente a un modelo mixto. Para el primer modelo
+se utiliza la función lm del paquete stats (predeterminado en R), para
+el modelo mixto se utiliza la función lmer del paquete lme4. Los dos
+enfoques parecen casi iguales, pero mientras que en los modelos lineales
+“simples” el efecto de cada escuela se añade en el famoso término de
+error de la regresión, en los modelos mixtos se extrae el efecto de cada
+escuela como un efecto aleatorio, es decir, tiene en cuenta que puede
+explciar cierta parte de la variabilidad entre los alumnos.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Modelo 1: Regresión lineal simple </span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>mod_simple <span class="ot">&lt;-</span> <span class="fu">lm</span>(rendimiento <span class="sc">~</span> horas_estudio, <span class="at">data =</span> df_edu)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(mod_simple)<span class="sc">$</span>coefficients, <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##               Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)      31.04       1.10   28.17        0
+## horas_estudio     2.27       0.18   12.92        0</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;R cuadrado: &quot;</span>, <span class="fu">round</span>(<span class="fu">summary</span>(mod_simple)<span class="sc">$</span>r.squared, <span class="dv">4</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;R cuadrado:  0.4575&quot;</code></pre>
+<p>En el modelo de efectos fijos, la media de rendimiento de todos los
+alumnos es de <span class="math inline">\(31,04\)</span> puntos y por
+cada hora de estudio el rendimiento aumenta en <span
+class="math inline">\(2,27\)</span> puntos. Este modelo explica, según
+el <span class="math inline">\(R^2\)</span>, un <span
+class="math inline">\(45,75\%\)</span> de la varianza. Esto es coherente
+con el planteamiento de los datos simulados, donde en la mayoría de
+colegios el efecto fijo es de <span class="math inline">\(2,5\)</span>
+puntos por hora estudiada y el rendimiento medio es de <span
+class="math inline">\(30\)</span> puntos.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Modelo 2: Modelo Mixto con Intercepto Aleatorio</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>mod_mixto <span class="ot">&lt;-</span> <span class="fu">lmer</span>(rendimiento <span class="sc">~</span> horas_estudio <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> escuela), <span class="at">data =</span> df_edu)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="fu">summary</span>(mod_mixto)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
+## Formula: rendimiento ~ horas_estudio + (1 | escuela)
+##    Data: df_edu
+## 
+## REML criterion at convergence: 1045.8
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -3.5075 -0.5531 -0.0202  0.5316  2.9712 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  escuela  (Intercept) 36.97    6.080   
+##  Residual              8.84    2.973   
+## Number of obs: 200, groups:  escuela, 10
+## 
+## Fixed effects:
+##               Estimate Std. Error t value
+## (Intercept)   31.47801    1.99015   15.82
+## horas_estudio  2.19271    0.08216   26.69
+## 
+## Correlation of Fixed Effects:
+##             (Intr)
+## horas_estud -0.235</code></pre>
+<p>Con el modelo de efectos mixtos, se ve cómo los efectos fijos (media
+de rendimiento y efecto de las horas de estudio) numéricamente no varían
+en exceso, sin embargo el error estándar de la media del rendimiento
+aumenta y el error del efecto de las horas de estudio baja. Esto se debe
+a que se está controlando el efecto “escuela” como variable aleatoria,
+por lo que la media no es tan buen predictor del conjunto mientras que
+el efecto de las horas de estudio se acota más (se elimina un efecto que
+podría confundir). Esto se ve en la tabla de los efectos aleatorios:
+aparece la varianza de las escuelas respecto al total. Esta medida, que
+compara la varianza de un efecto aleatorio con la total, se denomina
+Coeficiente de Correlación Intraclase (CCI) y es <span
+class="math inline">\(CCI=\frac{\sigma²_[efecto]}{\sigma²_[efecto]+\sigma²_[residual]}\)</span>.
+En el caso de esta simulación sería <span
+class="math inline">\(CCI=\frac{36,97}{36,97+8,84}=0,81\)</span>,
+indicando que el <span class="math inline">\(81\%\)</span> de la
+variabilidad en el rendimiento depende de la escuela a la que vaya. Esta
+medida en sí misma es muy orientativa de dónde pueden estar las
+verdaderas causas de algunos efectos académicos.</p>
+</div>
+</div>
+<div id="visualización-el-gráfico-de-spaghetti-vs.-línea-global"
+class="section level2">
+<h2>4. Visualización: El Gráfico de Spaghetti vs. Línea Global</h2>
+<p>La mejor forma de entender este marasmo de información es
+visualmente. En la regresión simple, se traza una sola línea para todos;
+en el modelo mixto, cada escuela tiene su propia línea.</p>
+<p><img src="2026_04_28_LMM_files/figure-html/grafico-1.png" alt="" width="672" /></p>
+</div>
+<div id="análisis-crítico-qué-se-ve-realmente" class="section level2">
+<h2>5. Análisis Crítico: ¿Qué se ve realmente?</h2>
+<p>La regresión de efectos fijos proporciona una única línea para todos
+los alumnos y escuelas, equivalente a la línea punteada negra en mitad
+de los datos. Ésta no representa bien a ninguna escuela en
+particular:</p>
+<ul>
+<li><p>Hay escuelas que están muy por encima (escuelas de alto
+rendimiento “per se”)</p></li>
+<li><p>Hay otras que están por debajo</p></li>
+<li><p><strong>La clave:</strong> El modelo mixto “aprende” que un
+alumno de la escuela A no es comparable directamente con uno de la
+escuela B sin antes ajustar por el efecto del centro</p></li>
+</ul>
+<p>Y esta capacidad de los modelos mixtos es solo el primer paso hacia
+modelos más avanzados que dan un entendimiento de la realidad más rico.
+En la gráfica anterior, por ejemplo, el rendimiento de la escuela número
+10 no parece muy bien representado. Esto se debe a que se ha tomado el
+modelo de efectos mixtos más simple posible, aquel en el que se atribuye
+una variabilidad en las escuelas, pero no se ha permitido variar la
+pendiente ni el punto de corte con el eje Y de cada escuela. No siendo
+objeto en este momento adentrarse en los modelos multinivel, solo un
+gráfico ayudará a entender cómo mejora rápidamente la explicación de los
+datos:</p>
+<p><img src="2026_04_28_LMM_files/figure-html/grafamplio-1.png" alt="" width="672" /></p>
+<p>En estos modelos multinivel se puede permitir variar tanto la
+pendiente de cada escuela como el punto en el cortan al eje Y (el famoso
+“intercepto” que nos devuelven los programas estadísticos), con lo que
+la explicación de los datos resulta mucho más realista. En este caso, se
+ve claramente cómo en la escuela 10 las horas de estudio no tienen
+efecto en el rendimiento, como por otra parte estaba claro al ser datos
+simulados con este objetivo.</p>
+<div id="el-coeficiente-de-correlación-intraclase-cci"
+class="section level3">
+<h3>El Coeficiente de Correlación Intraclase (CCI)</h3>
+<p>En el campo cuantitativos, el CCI es un métrica estrella aquí. Dice
+qué porcentaje de la varianza del rendimiento se debe exclusivamente al
+colegio. Si el CCI es alto (suele considerarse alto a partir de <span
+class="math inline">\(0,30\)</span>, por convenio), indicaría que el 30%
+del efecto medido de un niño depende de en qué colegio lo matricularon,
+no de cuánto estudió. Ignorar esto en una investigación pública sería un
+error ético y técnico.</p>
+</div>
+</div>
+<div id="conclusión-hacia-una-investigación-basada-en-la-evidencia-real"
+class="section level2">
+<h2>6. Conclusión: hacia una investigación basada en la evidencia
+(real)</h2>
+<p>Los Modelos Mixtos no son solo un “lujo estadístico”. Son una
+herramienta que permite:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Respetar la estructura de los datos:</strong> los humanos
+vivimos en grupos, la estadística debe reflejarlo</p></li>
+<li><p><strong>Identificar centros de éxito:</strong> al separar el
+efecto fijo del aleatorio, se puede ver qué escuelas están “añadiendo
+valor” por encima de lo esperado</p></li>
+<li><p><strong>Evitar políticas erróneas:</strong> no se debe aplicar la
+misma receta a todos los centros si sus puntos de partida son
+radicalmente distintos</p></li>
+</ol>
+<p>Seguir usando modelos de regresión de efectos fijos (los más
+habituales) puede acarrear serios problemas en la investigación en
+general y en la educativa en particular, donde los efectos de cada aula,
+de cada escuela e incluso de los barrios puede tener connotaciones
+únicas para el desarrollo académico del alumnado. En lugar de promediar,
+se debe modelar.</p>
+</div>
+<div id="referencias" class="section level2">
+<h2>Referencias</h2>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-merino2009" class="csl-entry">
+Pardo Merino, Antonio, and Miguel Ángel Ruiz Díaz. 2012. <em>Análisis de
+datos en ciencias sociales y de la salud III</em>. Síntesis. <a
+href="https://www.sintesis.com/libro/analisis-de-datos-en-ciencias-sociales-y-de-la-salud-iii">https://www.sintesis.com/libro/analisis-de-datos-en-ciencias-sociales-y-de-la-salud-iii</a>.
+</div>
+</div>
+<p><br></p>
+<p><a href="../posts.html">Volver</a></p>
+</div>
+
+<footer>
+    <p>🄯 2026 Germán Torres Varas </p>
+    <p>
+    <a href="https://www.linkedin.com/in/german-torres-varas/"> 
+        <span class="fa fa-linkedin"></span>
+    </a>    ·    
+    <a href="mailto:torresgvaras@gmail.com">
+        <span class="fa fa-envelope"></span>
+    </a>    ·   
+    <a href="https://www.researchgate.net/profile/German-Torres-Varas?ev=hdr_xprf">
+        <span class="fab fa-researchgate"></span>
+    </a>    ·   
+    <a href="https://x.com/GermanTorVar">
+        <span class="fa fa-twitter"></span>
+    </a>    ·   
+    <a href="https://github.com/GTorVar">
+        <span class="fa fa-github"></span>
+    </a>
+    </p>
+</footer>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

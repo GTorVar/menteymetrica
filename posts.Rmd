@@ -3,6 +3,8 @@ title: "Publicaciones"
 output: html_document
 ---
 
+- [Modelos Mixtos (LMM): el fin de los promedios y la agregación en Educación](posts/2026_04_28_LMM.html)
+
 - [La ‘tiranía’ de Gauss: por qué la normalidad es una alternativa y no una condición en psicología](posts/2026_04_07_Normalidad.html)
 
 - [La paradoja de la escala: del sesgo por 'n' pequeño a la tiranía del Big Data](posts/2026_04_06_Validez.html)
